@@ -6,6 +6,7 @@ perl -i -p0e 's@[^\}]*$@</cte>@s' cte1.xml
 
 # replace reserved and problematic characters
 perl -i -p0e "s@\x{02}@_@g" cte1.xml
+perl -i -p0e "s@\x{1d}@_@g" cte1.xml
 perl -i -p0e "s@&@&amp;@g" cte1.xml
 
 # Replace special character combinations

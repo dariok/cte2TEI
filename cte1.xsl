@@ -3,11 +3,15 @@
   <xsl:output omit-xml-declaration="1" />
   
   <xsl:template match="*:Text">
-    <xsl:for-each-group select="node()" group-ending-with="*:P">
-      <abc>
-        <xsl:apply-templates select="current-group()" />
-      </abc>
-    </xsl:for-each-group>
+    <xsl:text>
+  </xsl:text>
+    <Text>
+      <xsl:for-each-group select="node()" group-ending-with="*:P">
+        <Block>
+          <xsl:apply-templates select="current-group()" />
+        </Block>
+      </xsl:for-each-group>
+    </Text>
   </xsl:template>
   
   <xsl:template match="*:Format">

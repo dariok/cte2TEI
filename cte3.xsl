@@ -30,12 +30,10 @@
   </xsl:template>
   
   <xsl:template match="*:Block">
-<!--    <xsl:text>-->
-    <!--</xsl:text>-->
-    <xsl:variable name="number" select="substring-before(substring-after(*:P[last()]/@vals, 'P'), '|')"/>
+    <xsl:variable name="type" select="substring-after(*:P[last()]/@type, 'P')"/>
     <ab>
       <xsl:attribute name="type">
-        <xsl:value-of select="//*:pdef[@n = $number]/@name"/>
+        <xsl:value-of select="//*:pdef[@n = $type]/@name"/>
       </xsl:attribute>
       <xsl:apply-templates />
     </ab>

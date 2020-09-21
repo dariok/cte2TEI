@@ -40,8 +40,8 @@
   </xsl:template>
   
   <xsl:template match="*:Z">
-    <xsl:variable name="target" select="substring-before(substring-after(., 'N'), '|')"/>
-    <ptr type="note" target="#{$target}" />
+    <xsl:variable name="values" select="tokenize(., '\|')" />
+    <ptr type="note" subtype="{$values[1]}" n="{$values[2]}" />
   </xsl:template>
   
   <xsl:template match="*[preceding-sibling::*:Text]">

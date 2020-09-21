@@ -51,10 +51,23 @@
         <xsl:text>
     </xsl:text>
         <Note1>
-          <xsl:sequence select="current-group()" />
+          <xsl:apply-templates select="current-group()" />
         </Note1>
       </xsl:for-each-group>
     </Notes1>
+  </xsl:template>
+  
+  <xsl:template match="*:Apparatus1">
+    <xsl:text>  </xsl:text>
+    <Apparatus1>
+      <xsl:for-each-group select="node()" group-starting-with="*:W">
+        <xsl:text>
+    </xsl:text>
+        <App1>
+          <xsl:apply-templates select="current-group()" />
+        </App1>
+      </xsl:for-each-group>
+    </Apparatus1>
   </xsl:template>
   
   <xsl:template match="@* | node()">

@@ -55,6 +55,19 @@
     </HeaderFooter>
   </xsl:template>
   
+  <xsl:template match="*:Notes1">
+    <xsl:text>  </xsl:text>
+    <Notes1>
+      <xsl:for-each-group select="*" group-starting-with="*:W">
+        <xsl:text>
+    </xsl:text>
+        <Note1>
+          <xsl:sequence select="current-group()" />
+        </Note1>
+      </xsl:for-each-group>
+    </Notes1>
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

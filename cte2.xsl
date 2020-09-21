@@ -5,6 +5,9 @@
   
   <xsl:template match="*:cte">
     <TEI>
+      <standOff>
+        <xsl:apply-templates select="*:Text/following-sibling::*" />
+      </standOff>
       <xsl:apply-templates select="*:Text" />
     </TEI>
   </xsl:template>
@@ -34,5 +37,17 @@
   <xsl:template match="*:Z">
     <xsl:variable name="target" select="substring-before(substring-after(., 'N'), '|')"/>
     <ptr type="note" target="#{$target}" />
+  </xsl:template>
+  
+  <xsl:template match="*[preceding-sibling::*:Text]">
+    <xsl:copy>
+      <xsl:apply-templates />
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="*:Note1">
+    <note n="{normalize-space(*:W)}">
+      <xsl:apply-templates select="*:W[1]/following-sibling::node()" />
+    </note>
   </xsl:template>
 </xsl:stylesheet>

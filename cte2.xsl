@@ -29,6 +29,14 @@
     </HeaderFooter>
   </xsl:template>
   
+  <xsl:template match="*:Apparatus1 | *:Notes1 | *:Notes2">
+    <xsl:if test="normalize-space() != ''">
+      <xsl:copy>
+        <xsl:apply-templates />
+      </xsl:copy>
+    </xsl:if>
+  </xsl:template>
+  
   <xsl:template match="*:P/@vals">
     <xsl:choose>
       <xsl:when test="starts-with(., 'P')">

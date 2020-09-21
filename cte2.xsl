@@ -1,53 +1,37 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
   xmlns="http://www.tei-c.org/ns/1.0">
   
-  <xsl:output omit-xml-declaration="1" indent="1" />
-  
-  <xsl:template match="*:cte">
-    <TEI>
-      <standOff>
-        <xsl:apply-templates select="*:Text/following-sibling::*" />
-      </standOff>
-      <xsl:apply-templates select="*:Text" />
-    </TEI>
-  </xsl:template>
+  <xsl:output omit-xml-declaration="1" />
   
   <xsl:template match="*:Text">
-<!--    <xsl:text>-->
-  <!--</xsl:text>-->
-    <text>
-      <body>
-        <xsl:apply-templates select="*:Block" />
-      </body>
-    </text>
+    <xsl:text>  </xsl:text>
+    <Text>
+      <xsl:for-each-group select="descendant::node()" group-ending-with="*:P">
+        <xsl:text>
+    </xsl:text>
+        <Block>
+          <xsl:apply-templates select="current-group()" />
+        </Block>
+      </xsl:for-each-group>
+    </Text>
   </xsl:template>
   
-  <xsl:template match="*:Block">
-<!--    <xsl:text>-->
-    <!--</xsl:text>-->
-    <xsl:variable name="number" select="substring-before(substring-after(*:P[last()]/@vals, 'P'), '|')"/>
-    <ab>
-      <xsl:attribute name="type">
-        <xsl:value-of select="//*:pdef[@n = $number]/@name"/>
-      </xsl:attribute>
-      <xsl:apply-templates />
-    </ab>
+  <xsl:template match="*:HeaderFooter">
+    <xsl:text>  </xsl:text>
+    <HeaderFooter>
+      <xsl:for-each-group select="node()" group-ending-with="*:P">
+        <xsl:text>
+    </xsl:text>
+        <Block>
+          <xsl:apply-templates select="current-group()" />
+        </Block>
+      </xsl:for-each-group>
+    </HeaderFooter>
   </xsl:template>
   
-  <xsl:template match="*:Z">
-    <xsl:variable name="target" select="substring-before(substring-after(., 'N'), '|')"/>
-    <ptr type="note" target="#{$target}" />
-  </xsl:template>
-  
-  <xsl:template match="*[preceding-sibling::*:Text]">
+  <xsl:template match="@* | node()">
     <xsl:copy>
-      <xsl:apply-templates />
+      <xsl:apply-templates select="@* | node()" />
     </xsl:copy>
-  </xsl:template>
-  
-  <xsl:template match="*:Note1">
-    <note n="{normalize-space(*:W)}">
-      <xsl:apply-templates select="*:W[1]/following-sibling::node()" />
-    </note>
   </xsl:template>
 </xsl:stylesheet>

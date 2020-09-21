@@ -2,17 +2,8 @@
   
   <xsl:output omit-xml-declaration="1" />
   
-  <xsl:template match="*:Text">
-    <xsl:text>  </xsl:text>
-    <Text>
-      <xsl:for-each-group select="node()" group-ending-with="*:P">
-        <xsl:text>
-    </xsl:text>
-        <Block>
-          <xsl:apply-templates select="current-group()" />
-        </Block>
-      </xsl:for-each-group>
-    </Text>
+  <xsl:template match="*:F[@vals = 'a0' or normalize-space() = '']">
+    <xsl:apply-templates />
   </xsl:template>
   
   <xsl:template match="*:Format">
@@ -40,19 +31,6 @@
         </xsl:matching-substring>
       </xsl:analyze-string>
     </Fonts>
-  </xsl:template>
-  
-  <xsl:template match="*:HeaderFooter">
-    <xsl:text>  </xsl:text>
-    <HeaderFooter>
-      <xsl:for-each-group select="node()" group-ending-with="*:P">
-        <xsl:text>
-    </xsl:text>
-        <Block>
-          <xsl:apply-templates select="current-group()" />
-        </Block>
-      </xsl:for-each-group>
-    </HeaderFooter>
   </xsl:template>
   
   <xsl:template match="*:Notes1">

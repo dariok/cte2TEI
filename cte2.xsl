@@ -6,7 +6,7 @@
   <xsl:template match="*:Text">
     <xsl:text>  </xsl:text>
     <Text>
-      <xsl:for-each-group select="descendant::node()" group-ending-with="*:P">
+      <xsl:for-each-group select="node()" group-ending-with="*:P">
         <xsl:text>
     </xsl:text>
         <Block>

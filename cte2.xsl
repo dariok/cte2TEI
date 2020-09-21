@@ -30,4 +30,9 @@
       <xsl:apply-templates />
     </ab>
   </xsl:template>
+  
+  <xsl:template match="*:Z">
+    <xsl:variable name="target" select="substring-before(substring-after(., 'N'), '|')"/>
+    <ptr type="note" target="#{$target}" />
+  </xsl:template>
 </xsl:stylesheet>

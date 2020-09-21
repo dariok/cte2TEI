@@ -29,6 +29,18 @@
     </HeaderFooter>
   </xsl:template>
   
+  <xsl:template match="*:P/@vals">
+    <xsl:choose>
+      <xsl:when test="starts-with(., 'P')">
+        <xsl:attribute name="type" select="substring-before(., '|')" />
+        <xsl:attribute name="vals" select="substring-after(., '|')" />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="." />
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

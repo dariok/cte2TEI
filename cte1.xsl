@@ -23,6 +23,20 @@
     <xsl:sequence select="." />
   </xsl:template>
   
+  <xsl:template match="*:Fonts">
+    <xsl:text>
+  </xsl:text>
+    <Fonts>
+      <xsl:analyze-string select="." regex="(\d)\|([^\|]+)">
+        <xsl:matching-substring>
+          <xsl:text>
+    </xsl:text>
+          <Font num="{regex-group(1)}" name="{regex-group(2)}" />
+        </xsl:matching-substring>
+      </xsl:analyze-string>
+    </Fonts>
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

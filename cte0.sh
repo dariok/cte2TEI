@@ -8,6 +8,9 @@ perl -i -p0e 's@[^\}]*$@</cte>@s' cte.xml
 perl -i -p0e "s@\x{02}@_@g" cte.xml
 perl -i -p0e "s@&@&amp;@g" cte.xml
 
+# Replace special character combinations
+perl -i -p0e "s@\^-@@g" cte.xml
+
 # Teile im Prolog, die interessant sein könnten
 perl -i -p0e "s@\x{5c}TemplateSpacing@\n\x{5c}TemplateSpacing@g" cte.xml
 perl -i -p0e "s@\x{5c}User(\d+)@\n\x{5c}User\1@g" cte.xml

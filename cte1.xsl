@@ -58,7 +58,7 @@
   <xsl:template match="*:Notes1">
     <xsl:text>  </xsl:text>
     <Notes1>
-      <xsl:for-each-group select="*" group-starting-with="*:W">
+      <xsl:for-each-group select="node()" group-starting-with="*:W">
         <xsl:text>
     </xsl:text>
         <Note1>

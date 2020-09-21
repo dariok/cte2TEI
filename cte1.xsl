@@ -2,21 +2,6 @@
   
   <xsl:output omit-xml-declaration="1" />
   
-  <xsl:template match="*:F[@vals = 'a0' or normalize-space() = '']">
-    <xsl:apply-templates />
-  </xsl:template>
-  
-  <xsl:template match="*:F">
-    <xsl:copy>
-      <xsl:for-each select="tokenize(@vals, '\|')">
-        <xsl:if test="normalize-space(translate(., '+>', '')) != ''">
-          <xsl:attribute name="{translate(., '+>', '')}" select="." />
-        </xsl:if>
-      </xsl:for-each>
-      <xsl:apply-templates />
-    </xsl:copy>
-  </xsl:template>
-  
   <xsl:template match="*:Format">
     <xsl:text>
   </xsl:text>

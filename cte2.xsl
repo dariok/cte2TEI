@@ -1,5 +1,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
-  xmlns="http://www.tei-c.org/ns/1.0">
+  xmlns="http://www.tei-c.org/ns/1.0"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
   
   <xsl:output omit-xml-declaration="1" />
   
@@ -47,6 +48,27 @@
         <xsl:sequence select="." />
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="*:F">
+    <xsl:copy>
+      <xsl:for-each select="tokenize(@vals, '\|')">
+        <xsl:if test="normalize-space(translate(., '+>', '')) != ''">
+          <xsl:variable name="values" as="xs:string*">
+            <xsl:choose>
+              <xsl:when test="matches(., 'g\d')">
+                <xsl:sequence select="('font', substring-after(., 'g'))" />
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:sequence select="(translate(., '+>', ''), .)" />
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:variable>
+          <xsl:attribute name="{$values[1]}" select="$values[2]" />
+        </xsl:if>
+      </xsl:for-each>
+      <xsl:apply-templates />
+    </xsl:copy>
   </xsl:template>
   
   <xsl:template match="@* | node()">

@@ -1,13 +1,20 @@
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
-  xmlns="http://www.tei-c.org/ns/1.0">
+<xsl:stylesheet 
+  xmlns:tei="http://www.tei-c.org/ns/1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns="http://www.tei-c.org/ns/1.0"
+  version="3.0">
   
   <xsl:output omit-xml-declaration="1" indent="1" />
   
   <xsl:template match="*:cte">
     <TEI>
-      <standOff>
-        <xsl:apply-templates select="*:Text/following-sibling::*" />
-      </standOff>
+      <teiHeader>
+        <titleStmt>
+          <title>
+            <xsl:apply-templates select="//*:HeaderFooter/tei:ab[1]/node()" />
+          </title>
+        </titleStmt>
+      </teiHeader>
       <xsl:apply-templates select="*:Text" />
     </TEI>
   </xsl:template>

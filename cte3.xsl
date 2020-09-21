@@ -15,7 +15,7 @@
           </title>
         </titleStmt>
       </teiHeader>
-      <xsl:apply-templates select="*:Text" />
+      <xsl:apply-templates />
     </TEI>
   </xsl:template>
   

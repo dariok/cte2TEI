@@ -72,6 +72,17 @@
           <xsl:when test=". = 'k+'">
             <xsl:text>font-variant: smallCaps</xsl:text>
           </xsl:when>
+          <xsl:when test="matches(., 'w\-?\d+')">
+            <xsl:variable name="num">
+              <xsl:analyze-string select="." regex="w(-?)(\d+)">
+                <xsl:matching-substring>
+                  <xsl:value-of select="regex-group(1)" />
+                  <xsl:value-of select="number(regex-group(2)) div 10" />
+                </xsl:matching-substring>
+              </xsl:analyze-string>
+            </xsl:variable>
+            <xsl:value-of select="'letter-spacing: ' || $num || 'pt'"/>
+          </xsl:when>
           <xsl:otherwise>
             <xsl:sequence select="translate(., '+>', '')" />
           </xsl:otherwise>
@@ -89,7 +100,7 @@
       <xsl:when test="string-length($rendition) gt 0 or string-length($styles) gt 0">
         <hi>
           <xsl:if test="string-length($styles) gt 0">
-            <xsl:attribute name="rend" select="string-join($styles, '; ')" />
+            <xsl:attribute name="rend" select="string-join($styles, '; ') || ';'" />
           </xsl:if>
           <xsl:if test="string-length($rendition) gt 0">
             <xsl:attribute name="rendition" select="'#' || $rendition" />

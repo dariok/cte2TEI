@@ -63,10 +63,14 @@
       <xsl:for-each select="tokenize(@vals, '\|')">
         <xsl:choose>
           <xsl:when test=". = 'a0'" />
+          <xsl:when test="matches(., 'P\d')" />
           <xsl:when test="matches(., 'g\d')">
             <xsl:variable name="num" select="substring(., 2)"/>
             <xsl:variable name="font" select="normalize-space($Fonts/*:Font[@num = $num]/@name)" />
             <xsl:value-of select="'font-family: ' || $font"/>
+          </xsl:when>
+          <xsl:when test=". = 'k+'">
+            <xsl:text>font-variant: smallCaps</xsl:text>
           </xsl:when>
           <xsl:otherwise>
             <xsl:sequence select="translate(., '+>', '')" />

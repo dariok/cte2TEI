@@ -55,6 +55,10 @@
     </Apparatus1>
   </xsl:template>
   
+  <xsl:template match="*:F[*:P and normalize-space() = '']">
+    <xsl:sequence select="*:P" />
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

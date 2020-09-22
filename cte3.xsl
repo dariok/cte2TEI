@@ -69,6 +69,9 @@
             <xsl:variable name="font" select="normalize-space($Fonts/*:Font[@num = $num]/@name)" />
             <xsl:value-of select="'font-family: ' || $font"/>
           </xsl:when>
+          <xsl:when test=". = 'i+'">
+            <xsl:text>font-style: italic</xsl:text>
+          </xsl:when>
           <xsl:when test=". = 'k+'">
             <xsl:text>font-variant: smallCaps</xsl:text>
           </xsl:when>

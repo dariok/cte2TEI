@@ -56,6 +56,8 @@
     </note>
   </xsl:template>
   
+  <xsl:template match="tei:P" />
+  
   <xsl:template match="*:F">
     <xsl:variable name="styles">
       <xsl:for-each select="tokenize(@vals, '\|')">

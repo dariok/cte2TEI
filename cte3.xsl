@@ -6,6 +6,8 @@
   
   <xsl:output omit-xml-declaration="1" />
   
+  <xsl:variable name="Fonts" select="//*:Fonts"/>
+  
   <xsl:template match="*:cte">
     <TEI>
       <teiHeader>
@@ -52,6 +54,35 @@
     <note n="{normalize-space(*:W)}">
       <xsl:apply-templates select="*:W[1]/following-sibling::node()" />
     </note>
+  </xsl:template>
+  
+  <xsl:template match="*:F">
+    <xsl:variable name="styles">
+      <xsl:for-each select="tokenize(@vals, '\|')">
+        <xsl:choose>
+          <xsl:when test=". = 'a0'" />
+          <xsl:when test="matches(., 'g\d')">
+            <xsl:variable name="num" select="substring(., 2)"/>
+            <xsl:variable name="font" select="normalize-space($Fonts/*:Font[@num = $num]/@name)" />
+            <xsl:value-of select="'font-family: ' || $font"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:sequence select="translate(., '+>', '')" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each>
+    </xsl:variable>
+    
+    <xsl:choose>
+      <xsl:when test="count($styles) gt 0 and string-length($styles) gt 0">
+        <hi rend="{string-join($styles, '; ')}">
+          <xsl:apply-templates />
+        </hi>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates />
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template match="@* | node()">

@@ -56,7 +56,7 @@
     </note>
   </xsl:template>
   
-  <xsl:template match="tei:P" />
+  <xsl:template match="*:P" />
   
   <xsl:template match="*:F">
     <xsl:variable name="styles">
@@ -78,10 +78,22 @@
         </xsl:choose>
       </xsl:for-each>
     </xsl:variable>
+    <xsl:variable name="rendition">
+      <xsl:if test="matches(@vals, '^P\d+')">
+        <xsl:variable name="num" select="substring-before(substring(@vals, 2), '|')" />
+        <xsl:value-of select="//*:fdef[@n = $num]/@name" />
+      </xsl:if>
+    </xsl:variable>
     
     <xsl:choose>
-      <xsl:when test="count($styles) gt 0 and string-length($styles) gt 0">
-        <hi rend="{string-join($styles, '; ')}">
+      <xsl:when test="string-length($rendition) gt 0 or string-length($styles) gt 0">
+        <hi>
+          <xsl:if test="string-length($styles) gt 0">
+            <xsl:attribute name="rend" select="string-join($styles, '; ')" />
+          </xsl:if>
+          <xsl:if test="string-length($rendition) gt 0">
+            <xsl:attribute name="rendition" select="'#' || $rendition" />
+          </xsl:if>
           <xsl:apply-templates />
         </hi>
       </xsl:when>

@@ -4,7 +4,7 @@
   xmlns="http://www.tei-c.org/ns/1.0"
   version="3.0">
   
-  <xsl:output omit-xml-declaration="1" indent="1" />
+  <xsl:output omit-xml-declaration="1" />
   
   <xsl:template match="*:cte">
     <TEI>
@@ -20,8 +20,6 @@
   </xsl:template>
   
   <xsl:template match="*:Text">
-<!--    <xsl:text>-->
-  <!--</xsl:text>-->
     <text>
       <body>
         <xsl:apply-templates select="*:Block" />
@@ -54,5 +52,11 @@
     <note n="{normalize-space(*:W)}">
       <xsl:apply-templates select="*:W[1]/following-sibling::node()" />
     </note>
+  </xsl:template>
+  
+  <xsl:template match="@* | node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@* | node()" />
+    </xsl:copy>
   </xsl:template>
 </xsl:stylesheet>

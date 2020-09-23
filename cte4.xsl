@@ -13,9 +13,24 @@
     <teiHeader>
       <xsl:text>
     </xsl:text>
-      <titleStmt>
-        <xsl:apply-templates select="//*:HeaderFooter/tei:ab" />
-      </titleStmt>
+      <fileDesc>
+        <xsl:text>
+      </xsl:text>
+        <titleStmt>
+          <xsl:apply-templates select="//*:HeaderFooter/tei:ab" />
+        </titleStmt>
+      </fileDesc>
+      <xsl:text>
+    </xsl:text>
+      <encodingDesc>
+        <xsl:text>
+      </xsl:text>
+        <tagsDecl>
+          <xsl:apply-templates select="//*:Format/*" />
+          <xsl:text>
+      </xsl:text>
+        </tagsDecl>
+      </encodingDesc>
     </teiHeader>
   </xsl:template>
   
@@ -23,11 +38,20 @@
   <xsl:template match="*:HeaderFooter/tei:ab">
     <xsl:if test="normalize-space() != ''">
       <xsl:text>
-      </xsl:text>
+        </xsl:text>
       <title>
         <xsl:apply-templates />
       </title>
     </xsl:if>
+  </xsl:template>
+  
+  <xsl:template match="*:Format" />
+  <xsl:template match="*:Format/*">
+    <xsl:text>
+        </xsl:text>
+    <rendition scheme="cte" xml:id="{translate(@name, ' ', '_')}">
+      <xsl:value-of select="@def"/>
+    </rendition>
   </xsl:template>
   
   <xsl:template match="tei:text//tei:ab[@type = '']">

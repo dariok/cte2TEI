@@ -7,6 +7,13 @@
   
   <xsl:output omit-xml-declaration="1" />
   
+  <xsl:template match="tei:TEI">
+    <TEI>
+      <xsl:apply-templates select="tei:teiHeader" />
+      <xsl:apply-templates select="tei:text" />
+    </TEI>
+  </xsl:template>
+  
   <xsl:template match="tei:teiHeader">
     <xsl:text>
   </xsl:text>
@@ -66,7 +73,7 @@
     <text>
       <xsl:apply-templates />
       <back>
-        <xsl:apply-templates select="*:Notes1" />
+        <xsl:apply-templates select="//*:Notes1" />
       </back>
     </text>
   </xsl:template>
@@ -82,6 +89,34 @@
       <xsl:apply-templates />
     </note>
   </xsl:template>
+  
+  <!-- remove white space a start/end of notes -->
+  <xsl:template match="tei:note/node()[not(preceding-sibling::node()) and following-sibling::node()]">
+    <xsl:choose>
+      <xsl:when test="starts-with(.,  ' ') or starts-with(., '&#x2002;')">
+        <xsl:value-of select="substring(., 2)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="."></xsl:sequence>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="tei:note/node()[not(following-sibling::node()) and preceding-sibling::node()]">
+    <xsl:choose>
+      <xsl:when test="matches(., '\s$')">
+        <xsl:value-of select="substring(., 1, string-length(.) - 1)" />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="." />
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="tei:note[count(node()) = 1]/node()">
+    <xsl:value-of select="normalize-space(translate(., '&#x2002;', ''))" />
+  </xsl:template>
+  <!-- END remove white space -->
   
   <!-- Usage could not be ascertained -->
   <xsl:template match="*:S" />

@@ -56,7 +56,9 @@
     </note>
   </xsl:template>
   
-  <xsl:template match="*:P" />
+  <xsl:template match="*:P">
+    <milestone type="subdivision-ends" />
+  </xsl:template>
   
   <xsl:template match="*:F">
     <xsl:variable name="styles">

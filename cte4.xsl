@@ -62,6 +62,27 @@
     </p>
   </xsl:template>
   
+  <xsl:template match="tei:text">
+    <text>
+      <xsl:apply-templates />
+      <back>
+        <xsl:apply-templates select="*:Notes1" />
+      </back>
+    </text>
+  </xsl:template>
+  
+  <xsl:template match="*:Notes1">
+    <list type="notes1">
+      <xsl:apply-templates />
+    </list>
+  </xsl:template>
+  
+  <xsl:template match="tei:note">
+    <note xml:id="n{@n}">
+      <xsl:apply-templates />
+    </note>
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

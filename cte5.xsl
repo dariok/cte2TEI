@@ -21,6 +21,24 @@
     </xsl:choose>
   </xsl:template>
   
+  <xsl:template match="tei:hi">
+    <xsl:variable name="rend" select="@rend" />
+    <xsl:choose>
+      <xsl:when test="preceding-sibling::node()[1][not(@rend)] and following-sibling::node()[1][@rend = $rend]">
+        <hi>
+          <xsl:sequence select="@rend" />
+          <xsl:sequence select="node()" />
+          <xsl:sequence select="(following-sibling::* 
+            intersect following-sibling::node()[not(@rend = $rend)][1]/preceding-sibling::*)/node()" />
+        </hi>
+      </xsl:when>
+      <xsl:when test="preceding-sibling::node()[1][@rend = $rend] or following-sibling::node()[1][@rend = $rend]" />
+      <xsl:otherwise>
+        <xsl:sequence select="." />
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

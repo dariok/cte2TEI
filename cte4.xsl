@@ -83,6 +83,9 @@
     </note>
   </xsl:template>
   
+  <!-- Usage could not be ascertained -->
+  <xsl:template match="*:S" />
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

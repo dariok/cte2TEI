@@ -1,5 +1,6 @@
-<xsl:stylesheet 
+<xsl:stylesheet
   xmlns:tei="http://www.tei-c.org/ns/1.0"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.tei-c.org/ns/1.0"
   version="3.0">
@@ -62,7 +63,7 @@
   </xsl:template>
   
   <xsl:template match="*:F">
-    <xsl:variable name="styles">
+    <xsl:variable name="styles" as="xs:string*">
       <xsl:for-each select="tokenize(@vals, '\|')">
         <xsl:choose>
           <xsl:when test=". = 'a0'" />
@@ -107,9 +108,9 @@
     </xsl:variable>
     
     <xsl:choose>
-      <xsl:when test="string-length($rendition) gt 0 or string-length($styles) gt 0">
+      <xsl:when test="string-length($rendition) gt 0 or count($styles) gt 0">
         <hi>
-          <xsl:if test="string-length($styles) gt 0">
+          <xsl:if test="count($styles) gt 0">
             <xsl:attribute name="rend" select="string-join($styles, '; ') || ';'" />
           </xsl:if>
           <xsl:if test="string-length($rendition) gt 0">

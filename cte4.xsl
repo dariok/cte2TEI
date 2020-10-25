@@ -121,6 +121,20 @@
   <!-- Usage could not be ascertained -->
   <xsl:template match="*:S" />
   
+  <!-- create p, head by grouping milestones (from cte:P) -->
+  <xsl:template match="tei:body">
+    <body>
+      <xsl:for-each-group select="node()" group-ending-with="tei:milestone[@type eq 'subdivision-ends']">
+        <ab>
+          <xsl:if test="current-group()[position() eq last()]/@style">
+            <xsl:attribute name="type" select="current-group()[position() eq last()]/@style" />
+          </xsl:if>
+          <xsl:apply-templates select="current-group()[not(position() eq last())]" />
+        </ab>
+      </xsl:for-each-group>
+    </body>
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

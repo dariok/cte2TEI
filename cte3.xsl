@@ -78,6 +78,10 @@
           <xsl:when test=". = 'k+'">
             <xsl:text>font-variant: smallCaps</xsl:text>
           </xsl:when>
+          <xsl:when test="matches(., 's\d+')">
+            <xsl:variable name="num" select="number(substring(., 2)) div 10" />
+            <xsl:value-of select="'font-size: ' || $num || 'pt'" />
+          </xsl:when>
           <xsl:when test="matches(., 'w\-?\d+')">
             <xsl:variable name="num">
               <xsl:analyze-string select="." regex="w(-?)(\d+)">

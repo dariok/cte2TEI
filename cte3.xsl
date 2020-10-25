@@ -30,13 +30,7 @@
   </xsl:template>
   
   <xsl:template match="*:Block">
-    <xsl:variable name="type" select="substring-after(*:P[last()]/@type, 'P')"/>
-    <ab>
-      <xsl:attribute name="type">
-        <xsl:value-of select="//*:pdef[@n = $type]/@name"/>
-      </xsl:attribute>
-      <xsl:apply-templates />
-    </ab>
+    <xsl:apply-templates />
   </xsl:template>
   
   <xsl:template match="*:Z">
@@ -57,7 +51,14 @@
   </xsl:template>
   
   <xsl:template match="*:P">
-    <milestone type="subdivision-ends" />
+    <xsl:variable name="type" select="substring-after(@type, 'P')"/>
+    <milestone type="subdivision-ends">
+      <xsl:if test="$type">
+        <xsl:attribute name="style">
+          <xsl:value-of select="//*:pdef[@n = $type]/@name"/>
+        </xsl:attribute>
+      </xsl:if>
+    </milestone>
   </xsl:template>
   
   <xsl:template match="*:F">
@@ -65,7 +66,7 @@
       <xsl:for-each select="tokenize(@vals, '\|')">
         <xsl:choose>
           <xsl:when test=". = 'a0'" />
-          <xsl:when test="matches(., 'P\d')" />
+          <xsl:when test="matches(., 'P\d')"/>
           <xsl:when test="matches(., 'g\d')">
             <xsl:variable name="num" select="substring(., 2)"/>
             <xsl:variable name="font" select="normalize-space($Fonts/*:Font[@num = $num]/@name)" />

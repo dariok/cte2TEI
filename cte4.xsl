@@ -23,9 +23,7 @@
       <fileDesc>
         <xsl:text>
       </xsl:text>
-        <titleStmt>
-          <xsl:apply-templates select="//*:HeaderFooter/tei:ab" />
-        </titleStmt>
+        <xsl:sequence select="tei:titleStmt" />
       </fileDesc>
       <xsl:text>
     </xsl:text>

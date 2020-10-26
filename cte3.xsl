@@ -14,7 +14,7 @@
       <teiHeader>
         <titleStmt>
           <title>
-            <xsl:apply-templates select="//*:HeaderFooter/tei:ab[1]/node()" />
+            <xsl:apply-templates select="//*:HeaderFooter/*:Block[1]/node()[not(self::*:P)]" />
           </title>
         </titleStmt>
       </teiHeader>

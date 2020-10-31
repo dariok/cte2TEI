@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="CTE2TEI" default="TEI">
+  <!-- RegEx replacements to create XML from CTE text file -->
+  <target name="basicXML">
+    <tempfile property="cte1" suffix=".xml" destdir="temp"/>
+    <copy file="${cte}" tofile="${cte1}" />
+    
+    <!--  general outline to create a wellformed XML -->
+    <replaceregexp file="${cte1}" match="^[^\{]*(.*)" replace="&lt;cte>\1" flags="s" />
+    <replaceregexp file="${cte1}" match="[^\}]*$" replace="&lt;/cte>" flags="s" />
+    
+    <!--  replace reserved and problematic characters -->
+    <replaceregexp file="${cte1}" match="\u0002" replace="_" flags="g" />
+    <replaceregexp file="${cte1}" match="\u001d" replace="_" flags="g" />
+    <replaceregexp file="${cte1}" match="&amp;" replace="&amp;amp;" flags="g" />
+    
+    <!--  Replace special character combinations -->
+    <replaceregexp file="${cte1}" match="\^-" replace="" flags="g" />
+    <replaceregexp file="${cte1}" match="\^+" replace="–" flags="g" />
+    
+    <!--  Clean up prologue -->
+    <replaceregexp file="${cte1}" match="\\TemplateSpacing" replace="${line.separator}\\\\TemplateSpacing" flags="g" />
+    <replaceregexp file="${cte1}" match="\\User(\d+)" replace="${line.separator}\\\\User\1" flags="g" />
+    <replaceregexp file="${cte1}" match="\\FontUser(\d+)" replace="${line.separator}\\\\FontUser\1" flags="g" />
+    <replaceregexp file="${cte1}" match="\\User(\d+):([^,]+),(\d+)=(.+)"
+      replace="&lt;pdef lfd=&quot;User\1&quot; name=&quot;\2&quot; n=&quot;\3&quot; def=&quot;\4&quot; />" flags="g" />
+    <replaceregexp file="${cte1}" match="\\FontUser(\d+):([^,]+),(\d+)=(.+)"
+      replace="&lt;fdef lfd=&quot;FontUser\1&quot; name=&quot;\2&quot; n=&quot;\3&quot; def=&quot;\4&quot; />" flags="g" />
+    
+    <!--  main outline -->
+    <replaceregexp file="${cte1}" match="\{(Description|Text|Notes\d|Apparatus\d|Fonts|Format|HeaderFooter)\\" replace="&lt;\1>" flags="g" />
+    <replaceregexp file="${cte1}" match="\\(Description|Text|Notes\d|Apparatus\d|Fonts|Format|HeaderFooter)\}" replace="&lt;/\1>" flags="g" />
+    
+    <!--  we must not create elements without a name -->
+    <replaceregexp file="${cte1}" match="\{ " replace="&lt;Z>" flags="g" />
+    <replaceregexp file="${cte1}" match="\\ \}" replace="&lt;/Z>" flags="g" />
+    
+    <!--  paragraph marker -->
+    <replaceregexp file="${cte1}" match="\{P\\([^\\]*)\\P\}" replace="&lt;P vals=&quot;\1&quot; />" flags="g"/>
+    
+    <!--  other elements -->
+    <replaceregexp file="${cte1}" match="\{(.)([^\\]*)\\" replace="&lt;\1 vals=&quot;\2&quot;>" flags="g" />
+    <replaceregexp file="${cte1}" match="\\(.)\}" replace="&lt;/\1>" flags="g" />
+  </target>
+  
+  <!-- transform this to a (more or less) valid TEI that retains the info from CTE -->
+  <target name="TEI" depends="basicXML">
+    <tempfile property="cte2" suffix=".xml" destdir="temp"/>
+    <tempfile property="cte3" suffix=".xml" destdir="temp"/>
+    <tempfile property="cte4" suffix=".xml" destdir="temp"/>
+    <tempfile property="cte5" suffix=".xml" destdir="temp"/>
+    
+    <xslt in="${cte1}" style="cte1.xsl" out="${cte2}" processor="trax">
+<!--      <factory name="net.sf.saxon.TransformerFactoryImpl"/>-->
+    </xslt>
+    <!--<java classname="net.sf.saxon.Transform">
+      <arg value="-s:${cte1}" />
+      <arg value="-xsl:${basedir}/cte1.xsl" /> 
+      <arg value="-o:${cte2}" />
+      <arg value="-target:HE" />
+    </java>-->
+    <xslt in="${cte2}" style="cte2.xsl" out="${cte3}" />
+    <xslt in="${cte3}" style="cte3.xsl" out="${cte4}" />
+    <xslt in="${cte4}" style="cte4.xsl" out="${cte5}" />
+    <xslt in="${cte5}" style="cte5.xsl" out="${out}" />
+  </target>
+</project>

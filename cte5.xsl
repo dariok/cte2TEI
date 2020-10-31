@@ -28,8 +28,15 @@
         <hi>
           <xsl:sequence select="@rend" />
           <xsl:sequence select="node()" />
-          <xsl:sequence select="(following-sibling::* 
-            intersect following-sibling::node()[not(@rend = $rend)][1]/preceding-sibling::*)/node()" />
+          <xsl:choose>
+            <xsl:when test="following-sibling::node()[not(@rend = $rend)]">
+              <xsl:sequence select="(following-sibling::* 
+                intersect following-sibling::node()[not(@rend = $rend)][1]/preceding-sibling::*)/node()" />
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:sequence select="following-sibling::*/node()" />
+            </xsl:otherwise>
+          </xsl:choose>
         </hi>
       </xsl:when>
       <xsl:when test="preceding-sibling::node()[1][@rend = $rend] or following-sibling::node()[1][@rend = $rend]" />

@@ -11,6 +11,7 @@ perl -i -p0e "s@&@&amp;@g" cte1.xml
 
 # Replace special character combinations
 perl -i -p0e "s@\^-@@g" cte1.xml
+perl -i -p0e "s@\^+|–|g" cte1.xml
 
 # Clean up prologue
 perl -i -p0e "s@\x{5c}TemplateSpacing@\n\x{5c}TemplateSpacing@g" cte1.xml

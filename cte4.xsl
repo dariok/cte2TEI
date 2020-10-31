@@ -23,7 +23,7 @@
       <fileDesc>
         <xsl:text>
       </xsl:text>
-        <xsl:sequence select="tei:titleStmt" />
+        <xsl:apply-templates select="tei:titleStmt" />
       </fileDesc>
       <xsl:text>
     </xsl:text>

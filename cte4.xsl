@@ -135,6 +135,7 @@
           <xsl:if test="current-group()[position() eq last()]/@style">
             <xsl:attribute name="type" select="current-group()[position() eq last()]/@style" />
           </xsl:if>
+          <xsl:sequence select="current-group()[last()]/@vals" />
           <xsl:apply-templates select="current-group()[not(position() eq last())]" />
         </ab>
       </xsl:for-each-group>

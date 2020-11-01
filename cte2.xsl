@@ -46,6 +46,7 @@
           <xsl:value-of select="//*:pdef[@n = $type]/@name"/>
         </xsl:attribute>
       </xsl:if>
+      <xsl:sequence select="@vals" />
     </milestone>
   </xsl:template>
   

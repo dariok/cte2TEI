@@ -83,7 +83,15 @@
   </xsl:template>
   
   <xsl:template match="tei:note">
-    <note xml:id="n{@n}">
+    <note>
+      <xsl:choose>
+        <xsl:when test="@place">
+          <xsl:apply-templates select="@place" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:attribute name="xml:id" select="'n' || @n" />
+        </xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates />
     </note>
   </xsl:template>

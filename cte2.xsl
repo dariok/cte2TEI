@@ -57,17 +57,8 @@
         <xsl:sequence select="$vals" />
         <xsl:sequence select="current-group()[not(self::*:P)]" />
       </F>
-      <xsl:apply-templates select="current-group()[last()]" />
+      <xsl:apply-templates select="current-group()[self::*:P]" />
     </xsl:for-each-group>
-    <!--<F xmlns="">
-      <xsl:sequence select="@*" />
-      <xsl:sequence select="*:P/preceding-sibling::node()" />
-    </F>
-    <xsl:apply-templates select="*:P" />
-    <F xmlns="">
-      <xsl:sequence select="@*" />
-      <xsl:sequence select="*:P/following-sibling::node()" />
-    </F>-->
   </xsl:template>
   
   <xsl:template match="@* | node()">

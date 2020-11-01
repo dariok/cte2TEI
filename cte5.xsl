@@ -21,31 +21,6 @@
     </xsl:choose>
   </xsl:template>
   
-  <xsl:template match="tei:hi">
-    <xsl:variable name="rend" select="@rend" />
-    <xsl:choose>
-      <xsl:when test="preceding-sibling::node()[1][not(@rend)] and following-sibling::node()[1][@rend = $rend]">
-        <hi>
-          <xsl:sequence select="@rend" />
-          <xsl:sequence select="node()" />
-          <xsl:choose>
-            <xsl:when test="following-sibling::node()[not(@rend = $rend)]">
-              <xsl:sequence select="(following-sibling::* 
-                intersect following-sibling::node()[not(@rend = $rend)][1]/preceding-sibling::*)/node()" />
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:sequence select="following-sibling::*/node()" />
-            </xsl:otherwise>
-          </xsl:choose>
-        </hi>
-      </xsl:when>
-      <xsl:when test="preceding-sibling::node()[1][@rend = $rend] or following-sibling::node()[1][@rend = $rend]" />
-      <xsl:otherwise>
-        <xsl:sequence select="." />
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-  
   <!-- remove white space at beginning of ab -->
   <xsl:template match="tei:ab/text()[not(preceding-sibling::node())]">
     <xsl:choose>
@@ -62,7 +37,20 @@
     <xsl:text>
       </xsl:text>
     <ab>
-      <xsl:apply-templates select="@* | node()" />
+      <xsl:apply-templates select="@*" />
+      <xsl:for-each-group select="node()" group-adjacent="@rend || 't'">
+        <xsl:choose>
+          <xsl:when test="current-group()[self::tei:hi]">
+            <hi>
+              <xsl:sequence select="current-group()[1]/@rend" />
+              <xsl:apply-templates select="current-group()/node()" />
+            </hi>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:apply-templates select="current-group()" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each-group>
     </ab>
   </xsl:template>
   

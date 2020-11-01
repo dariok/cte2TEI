@@ -66,6 +66,11 @@
     </ab>
   </xsl:template>
   
+  <xsl:template match="*[not(namespace-uri() = 'http://www.tei-c.org/ns/1.0')]">
+    <xsl:message>unhandled element: <xsl:value-of select="local-name()"/></xsl:message>
+    <xsl:sequence select="." />
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

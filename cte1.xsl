@@ -56,7 +56,19 @@
   </xsl:template>
   
   <xsl:template match="*:F[*:P and normalize-space() = '']">
-    <xsl:sequence select="*:P" />
+    <xsl:apply-templates select="*:P" />
+  </xsl:template>
+  
+  <xsl:template match="*:P/@vals">
+    <xsl:choose>
+      <xsl:when test="starts-with(., 'P')">
+        <xsl:attribute name="type" select="substring-before(., '|')" />
+        <xsl:attribute name="vals" select="substring-after(., '|')" />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="." />
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template match="@* | node()">

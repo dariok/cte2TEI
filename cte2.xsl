@@ -38,16 +38,27 @@
     </xsl:if>
   </xsl:template>
   
-  <xsl:template match="*:P/@vals">
-    <xsl:choose>
-      <xsl:when test="starts-with(., 'P')">
-        <xsl:attribute name="type" select="substring-before(., '|')" />
-        <xsl:attribute name="vals" select="substring-after(., '|')" />
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:sequence select="." />
-      </xsl:otherwise>
-    </xsl:choose>
+  <xsl:template match="*:P">
+    <xsl:variable name="type" select="substring-after(@type, 'P')"/>
+    <milestone type="subdivision-ends">
+      <xsl:if test="$type">
+        <xsl:attribute name="style">
+          <xsl:value-of select="//*:pdef[@n = $type]/@name"/>
+        </xsl:attribute>
+      </xsl:if>
+    </milestone>
+  </xsl:template>
+  
+  <xsl:template match="*:F[*:P]">
+    <F xmlns="">
+      <xsl:sequence select="@*" />
+      <xsl:sequence select="*:P/preceding-sibling::node()" />
+    </F>
+    <xsl:apply-templates select="*:P" />
+    <F xmlns="">
+      <xsl:sequence select="@*" />
+      <xsl:sequence select="*:P/following-sibling::node()" />
+    </F>
   </xsl:template>
   
   <xsl:template match="@* | node()">

@@ -51,17 +51,6 @@
     </note>
   </xsl:template>
   
-  <xsl:template match="*:P">
-    <xsl:variable name="type" select="substring-after(@type, 'P')"/>
-    <milestone type="subdivision-ends">
-      <xsl:if test="$type">
-        <xsl:attribute name="style">
-          <xsl:value-of select="//*:pdef[@n = $type]/@name"/>
-        </xsl:attribute>
-      </xsl:if>
-    </milestone>
-  </xsl:template>
-  
   <xsl:template match="*:F">
     <xsl:variable name="styles" as="xs:string*">
       <xsl:for-each select="tokenize(@vals, '\|')">
@@ -123,6 +112,13 @@
         <xsl:apply-templates />
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+  
+  <!-- O = outer margin (I = inner margin) ? -->
+  <xsl:template match="*:O">
+    <note place="outer-margin">
+      <xsl:apply-templates />
+    </note>
   </xsl:template>
   
   <xsl:template match="@* | node()">

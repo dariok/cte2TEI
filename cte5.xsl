@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet 
   xmlns:tei="http://www.tei-c.org/ns/1.0"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.tei-c.org/ns/1.0"
   exclude-result-prefixes="#all"
@@ -57,6 +58,38 @@
   <xsl:template match="*[not(namespace-uri() = 'http://www.tei-c.org/ns/1.0')]">
     <xsl:message>unhandled element: <xsl:value-of select="local-name()"/></xsl:message>
     <xsl:sequence select="." />
+  </xsl:template>
+  
+  <xsl:template match="@vals">
+    <xsl:variable name="values" as="xs:string*">
+      <xsl:for-each select="tokenize(., '|')">
+        <xsl:choose>
+          <xsl:when test="substring(., 1, 2) = ('SA', 'SB')">
+            <xsl:analyze-string select="." regex="(\d+)">
+              <xsl:matching-substring>
+                <xsl:choose>
+                  <xsl:when test="substring(., 1, 2) eq 'SA'">
+                    <xsl:text>margin-bottom: </xsl:text>
+                  </xsl:when>
+                  <xsl:when test="substring(., 1, 2) eq 'SB'">
+                    <xsl:text>margin-top: </xsl:text>
+                  </xsl:when>
+                </xsl:choose>
+                <xsl:value-of select="number(regex-group(1)) div 10" />
+                <xsl:text>pt</xsl:text>
+              </xsl:matching-substring>
+            </xsl:analyze-string>
+          </xsl:when>
+          <xsl:when test=". eq 'AC'">
+            <xsl:text>text-align: center</xsl:text>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:for-each>
+    </xsl:variable>
+    
+    <xsl:if test="string-length($values) gt 0">
+      <xsl:attribute name="rend" select="string-join($values, '; ')" />
+    </xsl:if>
   </xsl:template>
   
   <xsl:template match="@* | node()">

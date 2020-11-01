@@ -40,14 +40,12 @@
   </xsl:template>
   
   <xsl:template match="*:HeaderFooter" />
-  <xsl:template match="*:HeaderFooter/tei:ab">
-    <xsl:if test="normalize-space() != ''">
-      <xsl:text>
-        </xsl:text>
+  <xsl:template match="tei:title">
+    <xsl:for-each-group select="node()" group-ending-with="tei:milestone">
       <title>
-        <xsl:apply-templates />
+        <xsl:apply-templates select="current-group()[not(position() eq last())]" />
       </title>
-    </xsl:if>
+    </xsl:for-each-group>
   </xsl:template>
   
   <xsl:template match="*:Format" />

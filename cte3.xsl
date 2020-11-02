@@ -51,6 +51,12 @@
     </note>
   </xsl:template>
   
+  <xsl:template match="*:App1">
+    <note type="app1" n="{count(preceding-sibling::*) + 1}">
+      <xsl:apply-templates select="*:W[1]/following-sibling::node()" />
+    </note>
+  </xsl:template>
+  
   <xsl:template match="*:F">
     <xsl:variable name="styles" as="xs:string*">
       <xsl:for-each select="tokenize(@vals, '\|')">

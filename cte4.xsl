@@ -69,25 +69,32 @@
     <text>
       <xsl:apply-templates />
       <back>
-        <xsl:apply-templates select="//*:Notes1" />
+        <xsl:apply-templates select="//*:Notes1 | //*:Apparatus1" />
       </back>
     </text>
   </xsl:template>
   
-  <xsl:template match="*:Notes1">
-    <list type="notes1">
+  <xsl:template match="*:Notes1 | *:Apparatus1">
+    <list type="{lower-case(local-name())}">
       <xsl:apply-templates />
     </list>
   </xsl:template>
   
   <xsl:template match="tei:note">
     <note>
+      <xsl:sequence select="@type" />
       <xsl:choose>
         <xsl:when test="@place">
           <xsl:apply-templates select="@place" />
         </xsl:when>
         <xsl:otherwise>
-          <xsl:attribute name="xml:id" select="'n' || @n" />
+          <xsl:attribute name="xml:id">
+            <xsl:choose>
+              <xsl:when test="@type eq 'app1'">I</xsl:when>
+              <xsl:otherwise>n</xsl:otherwise>
+            </xsl:choose>
+            <xsl:value-of select="@n" />
+          </xsl:attribute>
         </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates />

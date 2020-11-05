@@ -14,44 +14,39 @@
     </TEI>
   </xsl:template>
   
-  <xsl:template match="tei:teiHeader">
-    <xsl:text>
-  </xsl:text>
-    <teiHeader>
-      <xsl:text>
-    </xsl:text>
-      <fileDesc>
+  <xsl:template match="tei:teiHeader" xml:space="preserve">
+  <teiHeader>
+    <fileDesc>
+      <xsl:apply-templates select="tei:titleStmt" />
+    </fileDesc>
+    <encodingDesc>
+      <tagsDecl>
+        <xsl:apply-templates select="//*:Format/*" />
+      </tagsDecl>
+    </encodingDesc>
+  </teiHeader>
+  </xsl:template>
+  
+  <xsl:template match="tei:titleStmt">
+    <titleStmt>
+      <xsl:for-each-group select="tei:title/node()" group-ending-with="tei:milestone">
         <xsl:text>
-      </xsl:text>
-        <xsl:apply-templates select="tei:titleStmt" />
-      </fileDesc>
-      <xsl:text>
-    </xsl:text>
-      <encodingDesc>
-        <xsl:text>
-      </xsl:text>
-        <tagsDecl>
-          <xsl:apply-templates select="//*:Format/*" />
-          <xsl:text>
-      </xsl:text>
-        </tagsDecl>
-      </encodingDesc>
-    </teiHeader>
+        </xsl:text>
+        <title>
+          <xsl:apply-templates select="current-group()[not(position() eq last())]" />
+        </title>
+      </xsl:for-each-group>
+    </titleStmt>
   </xsl:template>
   
   <xsl:template match="*:HeaderFooter" />
-  <xsl:template match="tei:title">
-    <xsl:for-each-group select="node()" group-ending-with="tei:milestone">
-      <title>
-        <xsl:apply-templates select="current-group()[not(position() eq last())]" />
-      </title>
-    </xsl:for-each-group>
-  </xsl:template>
   
   <xsl:template match="*:Format" />
   <xsl:template match="*:Format/*">
-    <xsl:text>
+    <xsl:if test="preceding-sibling::*">
+      <xsl:text>
         </xsl:text>
+    </xsl:if>
     <rendition scheme="cte" xml:id="{translate(@name, ' ', '_')}">
       <xsl:value-of select="@def"/>
     </rendition>

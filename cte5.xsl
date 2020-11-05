@@ -25,21 +25,7 @@
     </xsl:choose>
   </xsl:template>
   
-  <!-- remove white space at beginning of ab -->
-  <xsl:template match="tei:ab/text()[not(preceding-sibling::node())]">
-    <xsl:choose>
-      <xsl:when test="starts-with(., '&#x0A;')">
-        <xsl:value-of select="substring(., 2)" />
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="." />
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-  
   <xsl:template match="tei:ab">
-    <xsl:text>
-      </xsl:text>
     <ab>
       <xsl:apply-templates select="@*" />
       <xsl:for-each-group select="node()" group-adjacent="@rend || 't'">
@@ -93,7 +79,20 @@
     </xsl:if>
   </xsl:template>
   
-  <xsl:template match="@* | node()">
+  <xsl:template match="tei:ab//text()">
+    <xsl:analyze-string select="." regex="\n">
+      <xsl:matching-substring>
+        <xsl:text>
+        </xsl:text>
+        <lb/>
+      </xsl:matching-substring>
+      <xsl:non-matching-substring>
+        <xsl:value-of select="." />
+      </xsl:non-matching-substring>
+    </xsl:analyze-string>
+  </xsl:template>
+  
+  <xsl:template match="@* | *">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />
     </xsl:copy>

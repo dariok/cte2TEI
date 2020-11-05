@@ -45,10 +45,10 @@
   
   <!-- transform this to a (more or less) valid TEI that retains the info from CTE -->
   <target name="TEI" depends="basicXML">
-    <tempfile property="cte2" suffix=".xml" destdir="temp"/>
-    <tempfile property="cte3" suffix=".xml" destdir="temp"/>
-    <tempfile property="cte4" suffix=".xml" destdir="temp"/>
-    <tempfile property="cte5" suffix=".xml" destdir="temp"/>
+    <tempfile property="cte2" suffix="-2.xml" destdir="temp"/>
+    <tempfile property="cte3" suffix="-3.xml" destdir="temp"/>
+    <tempfile property="cte4" suffix="-4.xml" destdir="temp"/>
+    <tempfile property="cte5" suffix="-5.xml" destdir="temp"/>
     
     <xslt in="${cte1}" style="cte1.xsl" out="${cte2}" processor="trax">
 <!--      <factory name="net.sf.saxon.TransformerFactoryImpl"/>-->

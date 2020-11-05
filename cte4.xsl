@@ -47,7 +47,7 @@
       <xsl:text>
         </xsl:text>
     </xsl:if>
-    <rendition scheme="cte" xml:id="{translate(@name, ' ', '_')}">
+    <rendition scheme="other" xml:id="{translate(@name, ' ', '_')}">
       <xsl:value-of select="@def"/>
     </rendition>
   </xsl:template>

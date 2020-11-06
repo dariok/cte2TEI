@@ -15,8 +15,8 @@
     <replaceregexp file="${cte1}" match="&amp;" replace="&amp;amp;" flags="g" />
     
     <!--  Replace special character combinations -->
-    <replaceregexp file="${cte1}" match="\^-" replace="" flags="g" />
-    <replaceregexp file="${cte1}" match="\^+" replace="–" flags="g" />
+    <replaceregexp file="${cte1}" match="\^\-" replace="" flags="g" />
+    <replaceregexp file="${cte1}" match="\^\+" replace="&#x00AD;" flags="g" />
     
     <!--  Clean up prologue -->
     <replaceregexp file="${cte1}" match="\\TemplateSpacing" replace="${line.separator}\\\\TemplateSpacing" flags="g" />

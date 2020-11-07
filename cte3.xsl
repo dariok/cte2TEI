@@ -61,17 +61,17 @@
     <xsl:variable name="styles" as="xs:string*">
       <xsl:for-each select="tokenize(@vals, '\|')">
         <xsl:choose>
-          <xsl:when test=". = 'a0'" />
+          <xsl:when test=". eq 'a0'" />
           <xsl:when test="matches(., 'P\d')"/>
           <xsl:when test="matches(., 'g\d')">
             <xsl:variable name="num" select="substring(., 2)"/>
             <xsl:variable name="font" select="normalize-space($Fonts/*:Font[@num = $num]/@name)" />
             <xsl:value-of select="'font-family: ' || $font"/>
           </xsl:when>
-          <xsl:when test=". = 'i+'">
+          <xsl:when test=". eq 'i+'">
             <xsl:text>font-style: italic</xsl:text>
           </xsl:when>
-          <xsl:when test=". = 'k+'">
+          <xsl:when test=". eq 'k+'">
             <xsl:text>font-variant: smallCaps</xsl:text>
           </xsl:when>
           <xsl:when test="matches(., 's\d+')">
@@ -88,6 +88,9 @@
               </xsl:analyze-string>
             </xsl:variable>
             <xsl:value-of select="'letter-spacing: ' || $num || 'pt'"/>
+          </xsl:when>
+          <xsl:when test=". eq 'c+'">
+            <xsl:text>text-transform: uppercase</xsl:text>
           </xsl:when>
           <xsl:otherwise>
             <xsl:sequence select="translate(., '+>', '')" />

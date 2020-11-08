@@ -22,6 +22,11 @@
       <xsl:when test="$note eq 'A'">
         <xsl:sequence select="//tei:back/tei:list[@type = 'apparatus1']/tei:note[@xml:id = 'I' || $num]" />
       </xsl:when>
+      <xsl:when test="not(@n or @subtype)">
+        <xsl:variable name="d" select="@target"/>
+        <ptr type="{preceding-sibling::tei:ptr[@target = $d]/@subtype}"
+          target="#{preceding-sibling::tei:ptr[@target = $d]/@n}" />
+      </xsl:when>
     </xsl:choose>
   </xsl:template>
   

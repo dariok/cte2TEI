@@ -35,8 +35,24 @@
   </xsl:template>
   
   <xsl:template match="*:Z">
-    <xsl:variable name="values" select="tokenize(., '\|')" />
-    <ptr type="note" subtype="{$values[1]}" n="{$values[2]}" />
+    <xsl:variable name="attributes" as="attribute()*">
+      <xsl:for-each select="tokenize(., '\|')">
+        <xsl:choose>
+          <xsl:when test="starts-with(., 'A')">
+            <xsl:attribute name="subtype" select="." />
+          </xsl:when>
+          <xsl:when test="starts-with(., 'D')">
+            <xsl:attribute name="target" select="'#' || ." />
+          </xsl:when>
+          <xsl:when test="starts-with(., 'I')">
+            <xsl:attribute name="n" select="." />
+          </xsl:when>
+        </xsl:choose>
+      </xsl:for-each>
+    </xsl:variable>
+    <ptr type="note">
+      <xsl:sequence select="$attributes" />
+    </ptr>
   </xsl:template>
   
   <xsl:template match="*[preceding-sibling::*:Text]">

@@ -87,6 +87,9 @@
           <xsl:when test=". eq 'i+'">
             <xsl:text>font-style: italic</xsl:text>
           </xsl:when>
+          <xsl:when test=". eq 'b+'">
+            <xsl:text>font-weight: bold</xsl:text>
+          </xsl:when>
           <xsl:when test=". eq 'k+'">
             <xsl:text>font-variant: smallCaps</xsl:text>
           </xsl:when>

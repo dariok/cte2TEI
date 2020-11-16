@@ -47,7 +47,7 @@
 									<String></String>
 								</field>
 								<field name="value">
-									<String>${cfd}/${cfn}-tei.xml</String>
+									<String>${cfd}/tei/${cfn}.xml</String>
 								</field>
 								<field name="defaultValue">
 									<null/>
@@ -134,7 +134,7 @@
 						<Boolean>true</Boolean>
 					</field>
 					<field name="locationToOpenInBrowserURL">
-						<String>${cfd}/${cfn}-tei.xml</String>
+						<String>${cfd}/tei/${cfn}.xml</String>
 					</field>
 					<field name="openInEditor">
 						<Boolean>true</Boolean>

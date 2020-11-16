@@ -51,18 +51,12 @@
     <tempfile property="cte4" suffix="-4.xml" destdir="temp"/>
     <tempfile property="cte5" suffix="-5.xml" destdir="temp"/>
     
-    <xslt in="${cte1}" style="cte1.xsl" out="${cte2}" processor="trax">
-<!--      <factory name="net.sf.saxon.TransformerFactoryImpl"/>-->
-    </xslt>
-    <!--<java classname="net.sf.saxon.Transform">
-      <arg value="-s:${cte1}" />
-      <arg value="-xsl:${basedir}/cte1.xsl" /> 
-      <arg value="-o:${cte2}" />
-      <arg value="-target:HE" />
-    </java>-->
+    <xslt in="${cte1}" style="cte1.xsl" out="${cte2}" />
     <xslt in="${cte2}" style="cte2.xsl" out="${cte3}" />
     <xslt in="${cte3}" style="cte3.xsl" out="${cte4}" />
     <xslt in="${cte4}" style="cte4.xsl" out="${cte5}" />
     <xslt in="${cte5}" style="cte5.xsl" out="${out}" />
+    
+    <delete dir="temp" />
   </target>
 </project>

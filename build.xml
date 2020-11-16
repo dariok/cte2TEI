@@ -12,6 +12,7 @@
     <!--  replace reserved and problematic characters -->
     <replaceregexp file="${cte1}" match="\u0002" replace="_" flags="g" />
     <replaceregexp file="${cte1}" match="\u001d" replace="_" flags="g" />
+    <replaceregexp file="${cte1}" match="\u001f" replace="_" flags="g" />
     <replaceregexp file="${cte1}" match="&amp;" replace="&amp;amp;" flags="g" />
     
     <!--  Replace special character combinations -->

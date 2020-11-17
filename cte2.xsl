@@ -1,10 +1,23 @@
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
+<xsl:stylesheet
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns="http://www.tei-c.org/ns/1.0"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  exclude-result-prefixes="#all"
+  version="3.0">
   
-  <xsl:output omit-xml-declaration="1" /> 
+  <xsl:output omit-xml-declaration="1" />
   
-  <xsl:template match="*:end" />
+  <xsl:template match="*:ab[*:P]">
+    <xsl:variable name="type" select="substring-after(*:P/@type, 'P')"/>
+    <ab>
+      <xsl:if test="$type">
+        <xsl:attribute name="style">
+          <xsl:value-of select="//*:pdef[@n = $type]/@name"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:apply-templates />
+    </ab>
+  </xsl:template>
   
   <xsl:template match="*:Z">
     <xsl:variable name="attributes" as="attribute()*">

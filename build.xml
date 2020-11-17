@@ -50,6 +50,9 @@
     <replaceregexp file="${cte0}" match="\{ " replace="&lt;Z>" flags="g" />
     <replaceregexp file="${cte0}" match="\\ \}" replace="&lt;/Z>" flags="g" />
     
+    <replaceregexp file="${cte0}" match="\{Q\\" replace="&lt;Qs/>" flags="g" />
+    <replaceregexp file="${cte0}" match="\\Q\}" replace="&lt;Qe/>" flags="g" />
+    
     <!--  paragraph marker -->
     <replaceregexp file="${cte0}" match="\{P\\([^\\]*)\\P\}" replace="&lt;P vals=&quot;\1&quot; />" flags="g"/>
     

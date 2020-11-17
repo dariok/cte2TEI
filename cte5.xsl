@@ -49,7 +49,12 @@
     </ab>
   </xsl:template>
   
-  <xsl:template match="*[not(namespace-uri() = 'http://www.tei-c.org/ns/1.0')]">
+  <!-- for now, ignore {Q\...\Q} -->
+  <xsl:template match="*:Qs | *:Qe
+    | node()[preceding-sibling::node()[1][self::*:Qs] and following-sibling::node()[1][self::*:Qe]]" />
+  
+  <xsl:template match="*[not(namespace-uri() = 'http://www.tei-c.org/ns/1.0')
+    and not(local-name() = ('Qs', 'Qe'))]">
     <xsl:message>unhandled element: <xsl:value-of select="local-name()"/></xsl:message>
     <xsl:sequence select="." />
   </xsl:template>

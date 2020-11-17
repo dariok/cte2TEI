@@ -84,19 +84,6 @@
     </xsl:if>
   </xsl:template>
   
-  <xsl:template match="tei:ab//text()">
-    <xsl:analyze-string select="." regex="\n">
-      <xsl:matching-substring>
-        <xsl:text>
-        </xsl:text>
-        <lb/>
-      </xsl:matching-substring>
-      <xsl:non-matching-substring>
-        <xsl:value-of select="." />
-      </xsl:non-matching-substring>
-    </xsl:analyze-string>
-  </xsl:template>
-  
   <xsl:template match="@* | *">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

@@ -15,9 +15,6 @@
     <!-- < character must be replaced in all instances -->
     <replaceregexp file="${cte0}" match="&lt;" replace="&amp;lt;" flags="g" />
     
-    <!-- newline serves as delimiter between blocks -->
-    <replaceregexp file="${cte0}" match="${line.separator}" replace="&lt;end/&gt;${line.separator}" flags="g" />
-    
     <!--  general outline to create a wellformed XML -->
     <replaceregexp file="${cte0}" match="^[^\{]*(.*)" replace="&lt;cte>\1" flags="s" />
     <replaceregexp file="${cte0}" match="[^\}]*$" replace="&lt;/cte>" flags="s" />
@@ -40,6 +37,10 @@
       replace="&lt;pdef lfd=&quot;User\1&quot; name=&quot;\2&quot; n=&quot;\3&quot; def=&quot;\4&quot; />" flags="g" />
     <replaceregexp file="${cte0}" match="\\FontUser(\d+):([^,]+),(\d+)=(.+)"
       replace="&lt;fdef lfd=&quot;FontUser\1&quot; name=&quot;\2&quot; n=&quot;\3&quot; def=&quot;\4&quot; />" flags="g" />
+    <replaceregexp file="${cte0}" match="name=&quot;\s+" replace="name=&quot;" flags="g" />
+    
+    <!-- newline serves as delimiter between blocks -->
+    <replaceregexp file="${cte0}" match="${line.separator}" replace="&lt;end/&gt;${line.separator}" flags="g" />
     
     <!--  main outline -->
     <replaceregexp file="${cte0}" match="\{(Description|Text|Notes\d|Apparatus\d|Fonts|Format|HeaderFooter)\\" replace="&lt;\1>" flags="g" />

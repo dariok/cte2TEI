@@ -13,13 +13,17 @@
     <TEI>
       <teiHeader>
         <titleStmt>
-          <title>
-            <xsl:apply-templates select="//*:HeaderFooter/*:Block[1]/node()[not(self::*:P)]" />
-          </title>
+          <xsl:apply-templates select="//*:HeaderFooter/*:ab[string-length(normalize-space()) gt 0]" />
         </titleStmt>
       </teiHeader>
       <xsl:apply-templates />
     </TEI>
+  </xsl:template>
+  
+  <xsl:template match="*:HeaderFooter/tei:ab">
+    <title>
+      <xsl:apply-templates />
+    </title>
   </xsl:template>
   
   <xsl:template match="*:Text">

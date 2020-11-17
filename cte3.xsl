@@ -30,10 +30,6 @@
     </text>
   </xsl:template>
   
-  <xsl:template match="*:Block">
-    <xsl:apply-templates />
-  </xsl:template>
-  
   <xsl:template match="*:Z">
     <xsl:variable name="attributes" as="attribute()*">
       <xsl:for-each select="tokenize(., '\|')">

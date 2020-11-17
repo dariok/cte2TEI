@@ -27,18 +27,6 @@
   </teiHeader>
   </xsl:template>
   
-  <xsl:template match="tei:titleStmt">
-    <titleStmt>
-      <xsl:for-each-group select="tei:title/node()" group-ending-with="tei:milestone">
-        <xsl:text>
-        </xsl:text>
-        <title>
-          <xsl:apply-templates select="current-group()[not(position() eq last())]" />
-        </title>
-      </xsl:for-each-group>
-    </titleStmt>
-  </xsl:template>
-  
   <xsl:template match="*:HeaderFooter" />
   
   <xsl:template match="*:Format" />
@@ -127,24 +115,8 @@
   <!-- Usage could not be ascertained -->
   <xsl:template match="*:S" />
   
-  <!-- create p, head by grouping milestones (from cte:P) -->
-  <xsl:template match="tei:body">
-    <xsl:text>
-    </xsl:text>
-    <body>
-      <xsl:for-each-group select="node()" group-ending-with="tei:milestone[@type eq 'subdivision-ends']">
-        <xsl:text>
-      </xsl:text>
-        <ab>
-          <xsl:if test="current-group()[position() eq last()]/@style">
-            <xsl:attribute name="type" select="current-group()[position() eq last()]/@style" />
-          </xsl:if>
-          <xsl:sequence select="current-group()[last()]/@vals" />
-          <xsl:apply-templates select="current-group()[not(position() eq last())]" />
-        </ab>
-      </xsl:for-each-group>
-    </body>
-  </xsl:template>
+  <!-- info should now be in ab -->
+  <xsl:template match="*:P" />
   
   <!-- avoid empty-only hi -->
   <xsl:template match="tei:hi">

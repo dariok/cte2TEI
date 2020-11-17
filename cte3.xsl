@@ -29,7 +29,7 @@
   <xsl:template match="*:Text">
     <text>
       <body>
-        <xsl:apply-templates select="*:Block" />
+        <xsl:apply-templates />
       </body>
     </text>
   </xsl:template>

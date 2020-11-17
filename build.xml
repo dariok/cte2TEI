@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." name="CTE2TEI" default="TEI">
+<project basedir="." name="CTE2TEI" default="basicXML">
+  <target name="clean">
+    <delete dir="temp" />
+  </target>
   <!-- RegEx replacements to create XML from CTE text file -->
-  <target name="basicXML">
+  <target name="basicXML" depends="clean">
     <tempfile property="cte1" suffix=".xml" destdir="temp"/>
-    <copy file="${cte}" tofile="${cte1}" />
+    <copy file="${cte}" tofile="${cte1}">
+      <filterchain>
+        <fixcrlf />
+      </filterchain>
+    </copy>
+    
+    <replaceregexp file="${cte1}" match="${line.separator}" replace="&lt;end/&gt;${line.separator}" flags="g" />
     
     <!--  general outline to create a wellformed XML -->
     <replaceregexp file="${cte1}" match="^[^\{]*(.*)" replace="&lt;cte>\1" flags="s" />
@@ -56,7 +65,5 @@
     <xslt in="${cte3}" style="cte3.xsl" out="${cte4}" />
     <xslt in="${cte4}" style="cte4.xsl" out="${cte5}" />
     <xslt in="${cte5}" style="cte5.xsl" out="${out}" />
-    
-    <delete dir="temp" />
   </target>
 </project>

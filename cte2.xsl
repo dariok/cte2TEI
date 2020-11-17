@@ -4,32 +4,6 @@
   
   <xsl:output omit-xml-declaration="1" />
   
-  <xsl:template match="*:Text">
-    <xsl:text>  </xsl:text>
-    <Text>
-      <xsl:for-each-group select="node()" group-ending-with="*:P">
-        <xsl:text>
-    </xsl:text>
-        <Block>
-          <xsl:apply-templates select="current-group()" />
-        </Block>
-      </xsl:for-each-group>
-    </Text>
-  </xsl:template>
-  
-  <xsl:template match="*:HeaderFooter">
-    <xsl:text>  </xsl:text>
-    <HeaderFooter>
-      <xsl:for-each-group select="node()" group-ending-with="*:P">
-        <xsl:text>
-    </xsl:text>
-        <Block>
-          <xsl:apply-templates select="current-group()" />
-        </Block>
-      </xsl:for-each-group>
-    </HeaderFooter>
-  </xsl:template>
-  
   <xsl:template match="*:Apparatus1 | *:Notes1 | *:Notes2">
     <xsl:if test="normalize-space() != ''">
       <xsl:copy>

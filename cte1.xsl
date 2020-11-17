@@ -14,6 +14,27 @@
     </Text>
   </xsl:template>
   
+  <xsl:template match="*:HeaderFooter">
+    <xsl:text>  </xsl:text>
+    <HeaderFooter>
+      <xsl:for-each-group select="node()" group-ending-with="*:end">
+        <xsl:text>
+    </xsl:text>
+        <ab>
+          <xsl:apply-templates select="current-group()" />
+        </ab>
+      </xsl:for-each-group>
+    </HeaderFooter>
+  </xsl:template>
+  
+  <xsl:template match="*:Apparatus1 | *:Notes1 | *:Notes2">
+    <xsl:if test="normalize-space() != ''">
+      <xsl:copy>
+        <xsl:apply-templates />
+      </xsl:copy>
+    </xsl:if>
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

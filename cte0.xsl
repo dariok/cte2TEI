@@ -1,6 +1,11 @@
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0">
+<xsl:stylesheet
+  xmlns:xstring = "https://github.com/dariok/XStringUtils"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  version="3.0">
   
   <xsl:output omit-xml-declaration="1" />
+  
+  <xsl:import href="https://raw.githubusercontent.com/dariok/w2tei/master/string-pack.xsl"/>
   
   <xsl:template match="*:Format">
     <xsl:text>
@@ -68,8 +73,8 @@
   <xsl:template match="*:P/@vals">
     <xsl:choose>
       <xsl:when test="starts-with(., 'P')">
-        <xsl:attribute name="type" select="substring-before(., '|')" />
-        <xsl:attribute name="vals" select="substring-after(., '|')" />
+        <xsl:attribute name="type" select="xstring:substring-before(., '|')" />
+        <xsl:attribute name="vals" select="xstring:substring-after(., '|')" />
       </xsl:when>
       <xsl:otherwise>
         <xsl:sequence select="." />

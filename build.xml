@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." name="CTE2TEI" default="TEI">
+<project basedir="." name="CTE2TEI" default="basicXML">
   <target name="clean">
     <delete dir="temp" />
   </target>
@@ -12,6 +12,10 @@
       </filterchain>
     </copy>
     
+    <!-- < character must be replaced in all instances -->
+    <replaceregexp file="${cte0}" match="&lt;" replace="&amp;lt;" flags="g" />
+    
+    <!-- newline serves as delimiter between blocks -->
     <replaceregexp file="${cte0}" match="${line.separator}" replace="&lt;end/&gt;${line.separator}" flags="g" />
     
     <!--  general outline to create a wellformed XML -->

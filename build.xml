@@ -1,65 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." name="CTE2TEI" default="basicXML">
+<project basedir="." name="CTE2TEI" default="TEI">
   <target name="clean">
     <delete dir="temp" />
   </target>
   <!-- RegEx replacements to create XML from CTE text file -->
   <target name="basicXML" depends="clean">
-    <tempfile property="cte1" suffix=".xml" destdir="temp"/>
-    <copy file="${cte}" tofile="${cte1}">
+    <tempfile property="cte0" suffix=".xml" destdir="temp"/>
+    <copy file="${cte}" tofile="${cte0}">
       <filterchain>
         <fixcrlf />
       </filterchain>
     </copy>
     
-    <replaceregexp file="${cte1}" match="${line.separator}" replace="&lt;end/&gt;${line.separator}" flags="g" />
+    <replaceregexp file="${cte0}" match="${line.separator}" replace="&lt;end/&gt;${line.separator}" flags="g" />
     
     <!--  general outline to create a wellformed XML -->
-    <replaceregexp file="${cte1}" match="^[^\{]*(.*)" replace="&lt;cte>\1" flags="s" />
-    <replaceregexp file="${cte1}" match="[^\}]*$" replace="&lt;/cte>" flags="s" />
+    <replaceregexp file="${cte0}" match="^[^\{]*(.*)" replace="&lt;cte>\1" flags="s" />
+    <replaceregexp file="${cte0}" match="[^\}]*$" replace="&lt;/cte>" flags="s" />
     
     <!--  replace reserved and problematic characters -->
-    <replaceregexp file="${cte1}" match="\u0002" replace="_" flags="g" />
-    <replaceregexp file="${cte1}" match="\u001d" replace="_" flags="g" />
-    <replaceregexp file="${cte1}" match="\u001f" replace="_" flags="g" />
-    <replaceregexp file="${cte1}" match="&amp;" replace="&amp;amp;" flags="g" />
+    <replaceregexp file="${cte0}" match="\u0002" replace="_" flags="g" />
+    <replaceregexp file="${cte0}" match="\u001d" replace="_" flags="g" />
+    <replaceregexp file="${cte0}" match="\u001f" replace="_" flags="g" />
+    <replaceregexp file="${cte0}" match="&amp;" replace="&amp;amp;" flags="g" />
     
     <!--  Replace special character combinations -->
-    <replaceregexp file="${cte1}" match="\^\-" replace="" flags="g" />
-    <replaceregexp file="${cte1}" match="\^\+" replace="&#x00AD;" flags="g" />
+    <replaceregexp file="${cte0}" match="\^\-" replace="" flags="g" />
+    <replaceregexp file="${cte0}" match="\^\+" replace="&#x00AD;" flags="g" />
     
     <!--  Clean up prologue -->
-    <replaceregexp file="${cte1}" match="\\TemplateSpacing" replace="${line.separator}\\\\TemplateSpacing" flags="g" />
-    <replaceregexp file="${cte1}" match="\\User(\d+)" replace="${line.separator}\\\\User\1" flags="g" />
-    <replaceregexp file="${cte1}" match="\\FontUser(\d+)" replace="${line.separator}\\\\FontUser\1" flags="g" />
-    <replaceregexp file="${cte1}" match="\\User(\d+):([^,]+),(\d+)=(.+)"
+    <replaceregexp file="${cte0}" match="\\TemplateSpacing" replace="${line.separator}\\\\TemplateSpacing" flags="g" />
+    <replaceregexp file="${cte0}" match="\\User(\d+)" replace="${line.separator}\\\\User\1" flags="g" />
+    <replaceregexp file="${cte0}" match="\\FontUser(\d+)" replace="${line.separator}\\\\FontUser\1" flags="g" />
+    <replaceregexp file="${cte0}" match="\\User(\d+):([^,]+),(\d+)=(.+)"
       replace="&lt;pdef lfd=&quot;User\1&quot; name=&quot;\2&quot; n=&quot;\3&quot; def=&quot;\4&quot; />" flags="g" />
-    <replaceregexp file="${cte1}" match="\\FontUser(\d+):([^,]+),(\d+)=(.+)"
+    <replaceregexp file="${cte0}" match="\\FontUser(\d+):([^,]+),(\d+)=(.+)"
       replace="&lt;fdef lfd=&quot;FontUser\1&quot; name=&quot;\2&quot; n=&quot;\3&quot; def=&quot;\4&quot; />" flags="g" />
     
     <!--  main outline -->
-    <replaceregexp file="${cte1}" match="\{(Description|Text|Notes\d|Apparatus\d|Fonts|Format|HeaderFooter)\\" replace="&lt;\1>" flags="g" />
-    <replaceregexp file="${cte1}" match="\\(Description|Text|Notes\d|Apparatus\d|Fonts|Format|HeaderFooter)\}" replace="&lt;/\1>" flags="g" />
+    <replaceregexp file="${cte0}" match="\{(Description|Text|Notes\d|Apparatus\d|Fonts|Format|HeaderFooter)\\" replace="&lt;\1>" flags="g" />
+    <replaceregexp file="${cte0}" match="\\(Description|Text|Notes\d|Apparatus\d|Fonts|Format|HeaderFooter)\}" replace="&lt;/\1>" flags="g" />
     
     <!--  we must not create elements without a name -->
-    <replaceregexp file="${cte1}" match="\{ " replace="&lt;Z>" flags="g" />
-    <replaceregexp file="${cte1}" match="\\ \}" replace="&lt;/Z>" flags="g" />
+    <replaceregexp file="${cte0}" match="\{ " replace="&lt;Z>" flags="g" />
+    <replaceregexp file="${cte0}" match="\\ \}" replace="&lt;/Z>" flags="g" />
     
     <!--  paragraph marker -->
-    <replaceregexp file="${cte1}" match="\{P\\([^\\]*)\\P\}" replace="&lt;P vals=&quot;\1&quot; />" flags="g"/>
+    <replaceregexp file="${cte0}" match="\{P\\([^\\]*)\\P\}" replace="&lt;P vals=&quot;\1&quot; />" flags="g"/>
     
     <!--  other elements -->
-    <replaceregexp file="${cte1}" match="\{(.)([^\\]*)\\" replace="&lt;\1 vals=&quot;\2&quot;>" flags="g" />
-    <replaceregexp file="${cte1}" match="\\(.)\}" replace="&lt;/\1>" flags="g" />
+    <replaceregexp file="${cte0}" match="\{(.)([^\\]*)\\" replace="&lt;\1 vals=&quot;\2&quot;>" flags="g" />
+    <replaceregexp file="${cte0}" match="\\(.)\}" replace="&lt;/\1>" flags="g" />
   </target>
   
   <!-- transform this to a (more or less) valid TEI that retains the info from CTE -->
   <target name="TEI" depends="basicXML">
+    <tempfile property="cte1" suffix="-1.xml" destdir="temp"/>
     <tempfile property="cte2" suffix="-2.xml" destdir="temp"/>
     <tempfile property="cte3" suffix="-3.xml" destdir="temp"/>
     <tempfile property="cte4" suffix="-4.xml" destdir="temp"/>
     <tempfile property="cte5" suffix="-5.xml" destdir="temp"/>
     
+    <xslt in="${cte0}" style="cte0.xsl" out="${cte1}" />
     <xslt in="${cte1}" style="cte1.xsl" out="${cte2}" />
     <xslt in="${cte2}" style="cte2.xsl" out="${cte3}" />
     <xslt in="${cte3}" style="cte3.xsl" out="${cte4}" />

@@ -15,6 +15,27 @@
     <xsl:apply-templates select="node()[self::*:P]" />
   </xsl:template>
   
+  <xsl:template match="*:Z">
+    <xsl:variable name="attributes" as="attribute()*">
+      <xsl:for-each select="tokenize(., '\|')">
+        <xsl:choose>
+          <xsl:when test="starts-with(., 'A')">
+            <xsl:attribute name="subtype" select="." />
+          </xsl:when>
+          <xsl:when test="starts-with(., 'D')">
+            <xsl:attribute name="target" select="'#' || ." />
+          </xsl:when>
+          <xsl:when test="starts-with(., 'I')">
+            <xsl:attribute name="n" select="." />
+          </xsl:when>
+        </xsl:choose>
+      </xsl:for-each>
+    </xsl:variable>
+    <ptr type="note">
+      <xsl:sequence select="$attributes" />
+    </ptr>
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

@@ -6,15 +6,6 @@
   
   <xsl:template match="*:end" />
   
-  <xsl:template match="*:F[*:P]">
-    <!-- P is always before \n; as \n is turned into *:end, there is a max of one P in F -->
-    <F xmlns="">
-      <xsl:sequence select="@*" />
-      <xsl:sequence select="node()[not(self::*:P)]" />
-    </F>
-    <xsl:apply-templates select="node()[self::*:P]" />
-  </xsl:template>
-  
   <xsl:template match="*:Z">
     <xsl:variable name="attributes" as="attribute()*">
       <xsl:for-each select="tokenize(., '\|')">

@@ -56,15 +56,13 @@
   </xsl:template>
   
   <xsl:template match="*:F[*:end]">
-    <F>
-      <xsl:sequence select="@*" />
-      <xsl:apply-templates select="node()[following-sibling::*:end]" />
-    </F>
-    <end />
-    <F>
-      <xsl:sequence select="@*" />
-      <xsl:apply-templates select="node()[preceding-sibling::*:end]" />
-    </F>
+    <xsl:for-each-group select="node()" group-ending-with="*:end">
+      <F>
+        <xsl:sequence select="parent::*/@*" />
+        <xsl:apply-templates select="current-group()[not(self::*:end)]" />
+      </F>
+      <xsl:sequence select="current-group()[self::*:end]" />
+    </xsl:for-each-group>
   </xsl:template>
   
   <xsl:template match="*:P/@vals">

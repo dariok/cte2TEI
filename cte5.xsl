@@ -11,25 +11,6 @@
   
   <xsl:template match="tei:back" />
   
-  <xsl:template match="tei:ptr[@type = 'note']">
-    <xsl:variable name="num" select="substring(@n, 2)" />
-    <xsl:variable name="note" select="substring(@subtype, 1, 1)" />
-    
-    <xsl:choose>
-      <xsl:when test="$note eq 'N'">
-        <xsl:sequence select="//tei:back/tei:list[@type = 'notes1']/tei:note[@xml:id = 'n' || $num]" />
-      </xsl:when>
-      <xsl:when test="$note eq 'A'">
-        <xsl:sequence select="//tei:back/tei:list[@type = 'apparatus1']/tei:note[@xml:id = 'I' || $num]" />
-      </xsl:when>
-      <xsl:when test="not(@n or @subtype)">
-        <xsl:variable name="d" select="@target"/>
-        <ptr type="{preceding-sibling::tei:ptr[@target = $d]/@subtype}"
-          target="#{preceding-sibling::tei:ptr[@target = $d]/@n}" />
-      </xsl:when>
-    </xsl:choose>
-  </xsl:template>
-  
   <xsl:template match="tei:ab">
     <ab>
       <xsl:apply-templates select="@*" />

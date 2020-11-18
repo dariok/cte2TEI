@@ -57,29 +57,28 @@
     </text>
   </xsl:template>
   
-  <xsl:template match="*:Notes1 | *:Apparatus1">
-    <list type="{lower-case(local-name())}">
-      <xsl:apply-templates />
-    </list>
+  <xsl:template match="tei:ptr[not(@corresp)]">
+    <xsl:variable name="n" select="@n" />
+    <xsl:variable name="position" select="@position" />
+    <xsl:apply-templates select="//tei:note[starts-with(@n, $n) and @position=$position]">
+      <xsl:with-param name="is" select="@is" />
+    </xsl:apply-templates>
   </xsl:template>
   
-  <xsl:template match="tei:note">
+  <xsl:template match="tei:note[not(@place)]">
+    <xsl:param name="is" />
     <note>
-      <xsl:sequence select="@type" />
-      <xsl:choose>
-        <xsl:when test="@place">
-          <xsl:apply-templates select="@place" />
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:attribute name="xml:id">
-            <xsl:choose>
-              <xsl:when test="@type eq 'app1'">I</xsl:when>
-              <xsl:otherwise>n</xsl:otherwise>
-            </xsl:choose>
-            <xsl:value-of select="@n" />
-          </xsl:attribute>
-        </xsl:otherwise>
-      </xsl:choose>
+      <xsl:sequence select="@type | @subtype | @n" />
+      <xsl:if test="$is">
+        <xsl:attribute name="is" select="$is" />
+      </xsl:if>
+      <xsl:attribute name="xml:id">
+        <xsl:choose>
+          <xsl:when test="@type eq 'app1'">a1-</xsl:when>
+          <xsl:otherwise>n</xsl:otherwise>
+        </xsl:choose>
+        <xsl:value-of select="@position" />
+      </xsl:attribute>
       <xsl:apply-templates />
     </note>
   </xsl:template>

@@ -29,7 +29,18 @@
         <xsl:otherwise>symbols</xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <ptr type="note" subtype="{$subtype}" n="{$n}" />
+    <xsl:variable name="values" select="tokenize(substring-before(text(), '\'), '\|')" />
+    
+    <ptr type="note" subtype="{$subtype}" n="{$n}">
+      <xsl:choose>
+        <xsl:when test="$values = 'R' and $values[starts-with(., 'D')]">
+          <xsl:attribute name="corresp" select="$values[starts-with(., 'D')]" />
+        </xsl:when>
+        <xsl:when test="$values[starts-with(., 'D')]">
+          <xsl:attribute name="is" select="$values[starts-with(., 'D')]" />
+        </xsl:when>
+      </xsl:choose>
+    </ptr>
   </xsl:template>
   
   <xsl:template match="*:Note1 | *:App1">

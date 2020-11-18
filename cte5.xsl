@@ -30,6 +30,13 @@
     </ab>
   </xsl:template>
   
+  <!-- replace ptr/@corresp by correct value the target’s xml:id -->
+  <xsl:template match="tei:ptr[@corresp]">
+    <xsl:variable name="partner" select="@corresp" />
+    <ptr type="{@type}" corresp="#{preceding-sibling::tei:note[@is = $partner]/@xml:id}" />
+  </xsl:template>
+  <xsl:template match="@is" />
+  
   <!-- for now, ignore {Q\...\Q} -->
   <xsl:template match="*:Qs | *:Qe
     | node()[preceding-sibling::node()[1][self::*:Qs] and following-sibling::node()[1][self::*:Qe]]" />

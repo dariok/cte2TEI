@@ -38,7 +38,6 @@
     <xsl:variable name="styles" as="xs:string*">
       <xsl:for-each select="tokenize(@vals, '\|')">
         <xsl:choose>
-          <xsl:when test=". eq 'a0'" />
           <xsl:when test="matches(., 'P\d')"/>
           <xsl:when test="matches(., 'g\d')">
             <xsl:variable name="num" select="substring(., 2)"/>

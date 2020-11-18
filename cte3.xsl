@@ -109,6 +109,14 @@
     </note>
   </xsl:template>
   
+  <xsl:template match="tei:ptr">
+    <ptr>
+      <xsl:sequence select="@*" />
+      <xsl:variable name="subtype" select="@subtype" />
+      <xsl:attribute name="position" select="count(preceding::tei:ptr[@subtype = $subtype]) + 1" />
+    </ptr>
+  </xsl:template>
+  
   <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

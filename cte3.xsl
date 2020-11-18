@@ -112,8 +112,10 @@
   <xsl:template match="tei:ptr">
     <ptr>
       <xsl:sequence select="@*" />
-      <xsl:variable name="subtype" select="@subtype" />
-      <xsl:attribute name="position" select="count(preceding::tei:ptr[@subtype = $subtype]) + 1" />
+      <xsl:if test="not(@corresp)">
+        <xsl:variable name="subtype" select="@subtype" />
+        <xsl:attribute name="position" select="count(preceding::tei:ptr[@subtype = $subtype and not(@corresp)]) + 1" />
+      </xsl:if>
     </ptr>
   </xsl:template>
   

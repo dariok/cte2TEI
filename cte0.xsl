@@ -63,14 +63,14 @@
   <xsl:template match="*:F[*:end]">
     <xsl:for-each-group select="node()" group-ending-with="*:end">
       <F>
-        <xsl:sequence select="parent::*/@*" />
+        <xsl:apply-templates select="parent::*/@*" />
         <xsl:apply-templates select="current-group()[not(self::*:end)]" />
       </F>
       <xsl:sequence select="current-group()[self::*:end]" />
     </xsl:for-each-group>
   </xsl:template>
   
-  <xsl:template match="*:P/@vals">
+  <xsl:template match="@vals">
     <xsl:choose>
       <xsl:when test="starts-with(., 'P')">
         <xsl:attribute name="type" select="xstring:substring-before(., '|')" />

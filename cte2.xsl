@@ -8,10 +8,11 @@
   <xsl:output omit-xml-declaration="1" />
   
   <xsl:template match="*:ab[*:P]">
-    <xsl:variable name="type" select="substring-after(*:P[@type][last()]/@type, 'P')"/>
+    <xsl:variable name="type" select="substring-after(*:P[@type]/@type, 'P')"/>
     <ab>
+      <xsl:sequence select="*:P/@vals" />
       <xsl:if test="$type">
-        <xsl:attribute name="style">
+        <xsl:attribute name="type">
           <xsl:value-of select="//*:pdef[@n = $type]/@name"/>
         </xsl:attribute>
       </xsl:if>

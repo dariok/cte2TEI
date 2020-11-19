@@ -47,36 +47,6 @@
     <xsl:sequence select="." />
   </xsl:template>
   
-  <xsl:template match="@vals">
-    <xsl:variable name="values" as="xs:string*">
-      <xsl:for-each select="tokenize(., '\|')">
-        <xsl:choose>
-          <xsl:when test="substring(., 1, 2) = ('SA', 'SB')">
-            <xsl:analyze-string select="." regex="(\d+)">
-              <xsl:matching-substring>
-                <xsl:choose>
-                  <xsl:when test="substring(., 1, 2) eq 'SA'">
-                    <xsl:value-of select="'margin-bottom: ' || number(regex-group(1)) div 10 || 'pt'" />
-                  </xsl:when>
-                  <xsl:when test="substring(., 1, 2) eq 'SB'">
-                    <xsl:value-of select="'margin-top: ' || number(regex-group(1)) div 10 || 'pt'" />
-                  </xsl:when>
-                </xsl:choose>
-              </xsl:matching-substring>
-            </xsl:analyze-string>
-          </xsl:when>
-          <xsl:when test=". eq 'AC'">
-            <xsl:text>text-align: center</xsl:text>
-          </xsl:when>
-        </xsl:choose>
-      </xsl:for-each>
-    </xsl:variable>
-    
-    <xsl:if test="count($values) gt 0">
-      <xsl:attribute name="rend" select="string-join($values, '; ')" />
-    </xsl:if>
-  </xsl:template>
-  
   <xsl:template match="@* | *">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />

@@ -14,7 +14,7 @@
   <xsl:template match="tei:ab">
     <ab>
       <xsl:apply-templates select="@*" />
-      <xsl:for-each-group select="node()" group-adjacent="@tylse || 't'">
+      <xsl:for-each-group select="node()" group-adjacent="@style || 't'">
         <xsl:choose>
           <xsl:when test="current-group()[self::tei:hi]">
             <hi>

@@ -127,7 +127,7 @@
         </xsl:when>
         <xsl:when test="matches(., 'L\-?\d+')">
           <xsl:variable name="num">
-            <xsl:analyze-string select="." regex="w-?(\d+)">
+            <xsl:analyze-string select="." regex="L-?(\d+)">
               <xsl:matching-substring>
                 <xsl:value-of select="number(regex-group(1 )) div 10" />
               </xsl:matching-substring>

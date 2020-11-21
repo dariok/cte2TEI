@@ -19,7 +19,7 @@
           <xsl:when test="current-group()[self::tei:hi]">
             <hi>
               <xsl:sequence select="current-group()[1]/@style" />
-              <xsl:apply-templates select="current-group()/node()" />
+              <xsl:apply-templates select="current-group()" />
             </hi>
           </xsl:when>
           <xsl:otherwise>

@@ -14,11 +14,11 @@
   <xsl:template match="tei:ab">
     <ab>
       <xsl:apply-templates select="@*" />
-      <xsl:for-each-group select="node()" group-adjacent="@rend || 't'">
+      <xsl:for-each-group select="node()" group-adjacent="@tylse || 't'">
         <xsl:choose>
           <xsl:when test="current-group()[self::tei:hi]">
             <hi>
-              <xsl:sequence select="current-group()[1]/@rend" />
+              <xsl:sequence select="current-group()[1]/@style" />
               <xsl:apply-templates select="current-group()/node()" />
             </hi>
           </xsl:when>
@@ -50,7 +50,7 @@
     <xsl:sequence select="." />
   </xsl:template>
   
-  <xsl:template match="@* | *">
+  <xsl:template match="@* | node()">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" />
     </xsl:copy>

@@ -177,9 +177,10 @@
         <!-- directives to be ignored for now -->
         <!-- TL: tab stops;
             RIS(B): unknown
+            ROF: unknown
         -->
         <xsl:when test="substring(., 1, 2) = ('TL')" />
-        <xsl:when test="substring(., 1, 3) = ('RIS')" />
+        <xsl:when test="substring(., 1, 3) = ('RIS', 'ROF')" />
         
         <!-- fallback -->
         <xsl:otherwise>

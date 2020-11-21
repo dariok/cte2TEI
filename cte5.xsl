@@ -41,8 +41,11 @@
   <xsl:template match="*:Qs | *:Qe
     | node()[preceding-sibling::node()[1][self::*:Qs] and following-sibling::node()[1][self::*:Qe]]" />
   
+  <!-- for now, ignore R -->
+  <xsl:template match="*:R" />
+  
   <xsl:template match="*[not(namespace-uri() = 'http://www.tei-c.org/ns/1.0')
-    and not(local-name() = ('Qs', 'Qe'))]">
+    and not(local-name() = ('Qs', 'Qe', 'R'))]">
     <xsl:message>unhandled element: <xsl:value-of select="local-name()"/></xsl:message>
     <xsl:sequence select="." />
   </xsl:template>

@@ -87,6 +87,7 @@
   <xsl:template match="@vals" mode="eval">
     <xsl:for-each select="tokenize(., '\|')">
       <xsl:choose>
+        <xsl:when test=". eq ''" />
         <xsl:when test="matches(., 'P\d')"/>
         <xsl:when test="matches(., 'g\d')">
           <xsl:variable name="num" select="substring(., 2)"/>

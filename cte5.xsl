@@ -30,6 +30,10 @@
     </ab>
   </xsl:template>
   
+  <xsl:template match="tei:hi">
+    <xsl:apply-templates />
+  </xsl:template>
+  
   <!-- replace ptr/@corresp by correct value the target’s xml:id -->
   <xsl:template match="tei:ptr[@corresp]">
     <xsl:variable name="partner" select="@corresp" />

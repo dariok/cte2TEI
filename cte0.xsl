@@ -1,6 +1,7 @@
 <xsl:stylesheet
   xmlns:xstring = "https://github.com/dariok/XStringUtils"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  exclude-result-prefixes="#all"
   version="3.0">
   
   <xsl:output omit-xml-declaration="1" />

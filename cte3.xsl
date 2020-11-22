@@ -3,6 +3,7 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.tei-c.org/ns/1.0"
+  exclude-result-prefixes="#all"
   version="3.0">
   
   <xsl:output omit-xml-declaration="1" />

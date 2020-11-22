@@ -7,8 +7,6 @@
   exclude-result-prefixes="#all"
   version="3.0">
   
-  <xsl:output omit-xml-declaration="1" />
-  
   <xsl:template match="tei:back" />
   
   <xsl:template match="tei:ab">

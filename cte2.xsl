@@ -8,7 +8,7 @@
   <xsl:output omit-xml-declaration="1" />
   
   <xsl:template match="*:ab[*:P]">
-    <xsl:variable name="type" select="substring-after(*:P[@type]/@type, 'P')"/>
+    <xsl:variable name="type" select="substring-after(*:P[@type][1]/@type, 'P')"/>
     <ab>
       <xsl:sequence select="*:P/@vals" />
       <xsl:if test="$type">

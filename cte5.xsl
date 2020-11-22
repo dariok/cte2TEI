@@ -14,10 +14,10 @@
       <xsl:apply-templates select="@*" />
       <xsl:for-each-group select="node()" group-adjacent="@style || 't'">
         <xsl:choose>
-          <xsl:when test="current-group()[self::tei:hi]">
+          <xsl:when test="count(current-group()) gt 1 and current-group()[self::tei:hi]">
             <hi>
               <xsl:sequence select="current-group()[1]/@style" />
-              <xsl:apply-templates select="current-group()" />
+              <xsl:apply-templates select="current-group()/node()" />
             </hi>
           </xsl:when>
           <xsl:otherwise>

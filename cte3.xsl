@@ -180,8 +180,9 @@
             RIS(B): unknown
             ROF: unknown
         -->
-        <xsl:when test="substring(., 1, 2) = ('TL')" />
-        <xsl:when test="substring(., 1, 3) = ('RIS', 'ROF')" />
+        <xsl:when test="substring(., 1, 1) = ('C', 'K', 'N')" />
+        <xsl:when test="substring(., 1, 2) = ('TL', 'WO', 'WW')" />
+        <xsl:when test="substring(., 1, 3) = ('RIS', 'RIU', 'ROF', 'ROU')" />
         
         <!-- fallback -->
         <xsl:otherwise>

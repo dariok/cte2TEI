@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+   xmlns:tei="http://www.tei-c.org/ns/1.0"
+   stylesheet="cte3.xsl"
+   run-as="external">
+   <x:scenario label="T1">
+      <x:scenario label="T1.1">
+         <x:context href="cte1.xspec" select="//x:scenario[@label eq 'T1.1']/x:expect/*:Text" />
+         <x:expect label="." xml:space="preserve"
+            ><text xmlns="http://www.tei-c.org/ns/1.0"><body>
+            <ab><hi
+               style="font-family: ; font-size: 12pt; n2057; r-;">[A</hi><hi
+               style="a0; n2057;"> </hi><hi
+               style="font-family: ; font-size: 12pt; n2057; r-;">1v:] </hi><hi
+               style="font-size: 10pt; n2057;">Confe</hi><hi
+               style="font-size: 10pt; a0; n2057;">ß</hi><hi
+               style="font-size: 10pt; n2057;">io Augustana in capite </hi><P xmlns="" style="text-align: center;" /></ab>
+            <ab><hi style="font-size: 10pt; n2057;"/><hi style="font-size: 10pt; n2057; font-style: italic;">de bonis operibus: Anno 30.</hi><hi style="font-family: ; font-size: 12pt; n2057; r-;"/><P xmlns="" style="text-align: center;" /></ab>
+            <ab><hi
+               style="font-family: ; font-size: 12pt; n2057; r-;"/><hi
+               style="font-size: 10pt; n2057; font-style: italic;"
+                  >Obedientia erga legem Dei, est necessaria in reconciliatis.</hi><Z xmlns="">N1|I1|Z1\<tei:hi
+   style="font-size: 10pt; n2057; font-style: italic; ;">1</tei:hi></Z><tei:hi
+      style="font-size: 10pt; n2057; font-style: italic;"> ibidem, </tei:hi><P xmlns="" style="margin-top: 5pt; text-align: center;" /></ab>
+            <ab><hi style="font-size: 10pt; n2057; font-style: italic;">De operibus ita iudicandum est, </hi><hi style="font-size: 10pt; n2057;">quod sint necessaria, </hi><hi style="font-size: 10pt; n2057; font-style: italic;"
+   >quod sint </hi><P xmlns="" style="text-align: center;" /></ab>
+            <ab><hi style="font-size: 10pt; n2057; font-style: italic;"
+               >cultus Dei et sacrificia spiritualia et mereantur praemia etc.</hi><Z xmlns="">N1|I2|Z1\<tei:hi
+               style="font-size: 10pt; n2057; font-style: italic; ;">2</tei:hi></Z><hi
+   style="font-family: ; font-size: 12pt; n2057; r-;"/><P xmlns="" style="text-align: center;" /></ab>
+            <ab><hi style="font-family: ; font-size: 12pt; n2057; r-;"/><hi style="font-size: 10pt; n2057;">A</hi><hi style="font-size: 10pt; a0; n2057;">POLOGIA CONFESSI: AVGVS:</hi><hi style="font-size: 10pt; n2057;"
+    /><P xmlns="" style="margin-top: 15pt; margin-bottom: 5pt; text-align: center;" /></ab>
+            <ab><hi
+               style="font-size: 10pt; n2057;"/><hi
+               style="font-size: 10pt; n2057; font-style: italic;"
+                  >Iustificati necessario pariunt bona opera seu bonos fructus.</hi><Z xmlns="">N1|I3|Z1\<tei:hi
+   style="font-size: 10pt; n2057; font-style: italic; ;">3</tei:hi></Z><hi style="font-family: ; font-size: 12pt; n2057; r-;"/><P xmlns="" style="text-align: center;" /></ab>
+            <ab><hi style="font-family: ; font-size: 12pt; n2057; r-;"/><hi style="font-size: 10pt; n2057;">C</hi><hi style="font-size: 10pt; a0; n2057;">ONFESSIO CIVITATVM SVPERIORIS</hi><hi style="font-size: 10pt; n2057;"
+   /><P xmlns="" style="margin-top: 15pt; text-align: center;" /></ab>
+            <ab><hi style="font-size: 10pt; n2057;">G</hi><hi style="font-size: 10pt; a0; n2057;">ERMANIAE AMPLECTENTIVM</hi><hi style="font-size: 10pt; n2057;" /><P xmlns="" style="text-align: center;" /></ab>
+            <ab><hi style="font-size: 10pt; n2057;"/><hi style="font-size: 10pt; n2057; font-style: italic;">Euangelium, in cap: de bonis operibus.</hi><hi style="font-family: ; font-size: 12pt; n2057; r-;"
+   /><P xmlns="" style="margin-bottom: 5pt; text-align: center;" /></ab>
+            <ab><hi style="font-family: ; font-size: 12pt; n2057; r-;"/><hi style="font-size: 10pt; n2057; font-style: italic;">Etsi </hi><hi style="font-size: 10pt; a0; n2057; font-style: italic;">ac</hi><hi style="font-size: 10pt; n2057; font-style: italic;"
+   >ceptatio ad uitam aeternam coniuncta est cum iustificatione </hi><hi style="font-size: 10pt; a0; n2057;"><lb xmlns="http://www.tei-c.org/ns/1.0" />
+</hi><hi style="font-size: 10pt; n2057; font-style: italic;">hoc est, cum remißione peccatorum</hi><Z
+   xmlns="">A1|I1|Z-6\<tei:hi style="font-size: 10pt; n2057; font-style: italic; ;">a</tei:hi></Z><hi
+   style="font-size: 10pt; n2057; font-style: italic;"> et reconciliatione, tamen</hi><hi
+   style="font-size: 10pt; n2057;"> Bona <lb xmlns="http://www.tei-c.org/ns/1.0" />
+opera sunt necessaria ad salutem, </hi><hi style="font-size: 10pt; n2057; font-style: italic;">quia sunt debitum, quod necessa=</hi><hi
+   style="font-size: 10pt; a0; n2057; font-style: italic;"><lb xmlns="http://www.tei-c.org/ns/1.0" />
+</hi><hi style="font-size: 10pt; n2057; font-style: italic;">rio reconciliationem sequi debet, sicut Paulus ait, Debitores </hi><hi
+   style="font-size: 10pt; a0; n2057; font-style: italic;"><lb xmlns="http://www.tei-c.org/ns/1.0" />
+</hi><hi style="font-size: 10pt; n2057; font-style: italic;">sumus</hi><hi style="font-size: 10pt; a0; n2057; font-style: italic;">.</hi><hi style="font-size: 10pt; n2057; font-style: italic;"> Item necessaria est</hi><hi
+   style="font-size: 10pt; n2057;"> in Saluandis <lb xmlns="http://www.tei-c.org/ns/1.0" />
+</hi><hi style="font-size: 10pt; n2057; font-style: italic;">inchoata nouitas.</hi><Z xmlns="">N1|I4|Z1\<tei:hi
+   style="font-size: 10pt; n2057; font-style: italic; ;">4</tei:hi></Z><hi
+   style="font-family: ; font-size: 12pt; n2057; r-;"/><P xmlns="" style="text-align: center;" /></ab>
+            <ab><hi style="font-family: ; font-size: 12pt; n2057; r-;"/><hi style="font-family: ; font-size: 12pt; n1031; r-;">[A</hi><hi style="a0; n2057;"> </hi><hi style="font-family: ; font-size: 12pt; n1031; r-;">2r:] </hi><hi style="font-size: 14pt;"
+   >Summa dieser erklerunge.</hi><hi style="font-family: ; font-size: 12pt; n1031; r-;"/><P xmlns="" style="margin-top: 30pt; text-align: center;" /></ab>
+            <ab><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;"
+      >Das die gute werck, so Gott geboten, vnnd der newe gehorsam den gleubigen vnd kindern Gottes gegen Gott jrem Vater zur sehligkeit n</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;">=</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;"
+      >tig seind, nicht die selbige dardurch zu uerdienen (Welche sie albereit, dieweil sie Gottes kinder seind, aus gnaden </hi><hi
+   style="font-style: italic;">Allein</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;"
+      > durch den glauben haben), sondern als wirckung des warhafftigen glaubens vnnd des heiligen Geistes vnd als fr</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;">F</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;"
+      >chte der gerechtigkeit vnd wiedergeburt, welche dem glauben folgen m</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;">F</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;"
+      >ssen vnd one welche, als</hi><Z xmlns="">N1|I5|Z1\<tei:hi style=";">5</tei:hi></Z><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;"
+      > ein guter baum one gute fr</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;">F</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;"
+      >chte, die so warhafftig gerecht vnd newe geboren nicht sein k</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;">=</hi><hi
+   style="font-family: ; font-size: 12pt; n1031; r-;">nnen noch sollen.</hi><P xmlns=""
+   style="margin-top: 10pt; text-align: justify;" /></ab>
+            <ab><hi style="font-family: ; font-size: 12pt; n1031; r-;">Denn darumb werden wir new geboren, das wir ein newe Creaturen werden, geschaffen inn Christo Jhesu zu guten wercken, zu welchen vns Gott zuuor bereitet hat, das wir darinnen wandeln sollen Ephe.2.</hi></ab></body></text></x:expect>
+      </x:scenario>
+   </x:scenario>
+</x:description>

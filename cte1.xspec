@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+   xmlns:tei="http://www.tei-c.org/ns/1.0"
+   stylesheet="cte1.xsl">
+   <x:scenario label="T1">
+      <x:scenario label="T1.1">
+         <x:context href="cte0.xspec" select="//x:scenario[@label eq 'T1.1']/x:expect/node()" />
+         <x:expect label="." xml:space="preserve">
+<Text xmlns="">
+            <tei:ab><F vals="g1|s120|n2057|r-">[A</F><F vals="a0|n2057"> </F><F vals="g1|s120|n2057|r-">1v:] </F><F vals="s100|n2057"
+   >Confe</F><F vals="s100|a0|n2057">ß</F><F vals="s100|n2057">io Augustana in capite </F><P vals="AC" /></tei:ab>
+            <tei:ab><F vals="s100|n2057">
+</F><F vals="s100|n2057|i+">de bonis operibus: Anno 30.</F><F vals="g1|s120|n2057|r-"/><P vals="AC" /></tei:ab>
+            <tei:ab><F vals="g1|s120|n2057|r-">
+</F><F vals="s100|n2057|i+">Obedientia erga legem Dei, est necessaria in reconciliatis.</F><Z>N1|I1|Z1\<F
+   vals="s100|n2057|i+|>+">1</F></Z><F vals="s100|n2057|i+"> ibidem, </F><P vals="SB50.0|AC" /></tei:ab>
+            <tei:ab><F vals="s100|n2057|i+">
+De operibus ita iudicandum est, </F><F vals="s100|n2057">quod sint necessaria, </F><F vals="s100|n2057|i+"
+   >quod sint </F><P vals="AC" /></tei:ab>
+            <tei:ab><F vals="s100|n2057|i+">
+cultus Dei et sacrificia spiritualia et mereantur praemia etc.</F><Z>N1|I2|Z1\<F vals="s100|n2057|i+|>+">2</F></Z><F
+   vals="g1|s120|n2057|r-"/><P vals="AC" /></tei:ab>
+            <tei:ab><F vals="g1|s120|n2057|r-">
+</F><F vals="s100|n2057">A</F><F vals="s100|a0|n2057">POLOGIA CONFESSI: AVGVS:</F><F vals="s100|n2057"
+    /><P vals="SB150.0|SA50.0|AC" /></tei:ab>
+            <tei:ab><F vals="s100|n2057">
+</F><F vals="s100|n2057|i+">Iustificati necessario pariunt bona opera seu bonos fructus.</F><Z>N1|I3|Z1\<F
+   vals="s100|n2057|i+|>+">3</F></Z><F vals="g1|s120|n2057|r-"/><P vals="AC" /></tei:ab>
+            <tei:ab><F vals="g1|s120|n2057|r-">
+</F><F vals="s100|n2057">C</F><F vals="s100|a0|n2057">ONFESSIO CIVITATVM SVPERIORIS</F><F vals="s100|n2057"
+   /><P vals="SB150.0|AC" /></tei:ab>
+            <tei:ab><F vals="s100|n2057">
+G</F><F vals="s100|a0|n2057">ERMANIAE AMPLECTENTIVM</F><F vals="s100|n2057" /><P vals="AC" /></tei:ab>
+            <tei:ab><F vals="s100|n2057">
+</F><F vals="s100|n2057|i+">Euangelium, in cap: de bonis operibus.</F><F vals="g1|s120|n2057|r-"
+   /><P vals="SA50.0|AC" /></tei:ab>
+            <tei:ab><F vals="g1|s120|n2057|r-">
+</F><F vals="s100|n2057|i+">Etsi </F><F vals="s100|a0|n2057|i+">ac</F><F vals="s100|n2057|i+"
+   >ceptatio ad uitam aeternam coniuncta est cum iustificatione </F><F vals="s100|a0|n2057"><lb xmlns="http://www.tei-c.org/ns/1.0" />
+</F><F vals="s100|n2057|i+">hoc est, cum remißione peccatorum</F><Z>A1|I1|Z-6\<F vals="s100|n2057|i+|>+">a</F></Z><F
+   vals="s100|n2057|i+"> et reconciliatione, tamen</F><F vals="s100|n2057"> Bona <lb xmlns="http://www.tei-c.org/ns/1.0" />
+opera sunt necessaria ad salutem, </F><F vals="s100|n2057|i+">quia sunt debitum, quod necessa=</F><F
+   vals="s100|a0|n2057|i+"><lb xmlns="http://www.tei-c.org/ns/1.0" />
+</F><F vals="s100|n2057|i+">rio reconciliationem sequi debet, sicut Paulus ait, Debitores </F><F
+   vals="s100|a0|n2057|i+"><lb xmlns="http://www.tei-c.org/ns/1.0" />
+</F><F vals="s100|n2057|i+">sumus</F><F vals="s100|a0|n2057|i+">.</F><F vals="s100|n2057|i+"> Item necessaria est</F><F
+   vals="s100|n2057"> in Saluandis <lb xmlns="http://www.tei-c.org/ns/1.0" />
+</F><F vals="s100|n2057|i+">inchoata nouitas.</F><Z>N1|I4|Z1\<F vals="s100|n2057|i+|>+">4</F></Z><F
+   vals="g1|s120|n2057|r-"/><P vals="AC" /></tei:ab>
+            <tei:ab><F vals="g1|s120|n2057|r-">
+</F><F vals="g1|s120|n1031|r-">[A</F><F vals="a0|n2057"> </F><F vals="g1|s120|n1031|r-">2r:] </F><F vals="s140"
+   >Summa dieser erklerunge.</F><F vals="g1|s120|n1031|r-"/><P vals="SB300.0|AC" /></tei:ab>
+            <tei:ab><F vals="g1|s120|n1031|r-">
+Das die gute werck, so Gott geboten, vnnd der newe gehorsam den gleubigen vnd kindern Gottes gegen Gott jrem Vater zur sehligkeit n</F><F
+   vals="g2|s120|n1031|r-">=</F><F vals="g1|s120|n1031|r-"
+   >tig seind, nicht die selbige dardurch zu uerdienen (Welche sie albereit, dieweil sie Gottes kinder seind, aus gnaden </F><F
+   vals="i+">Allein</F><F vals="g1|s120|n1031|r-"
+   > durch den glauben haben), sondern als wirckung des warhafftigen glaubens vnnd des heiligen Geistes vnd als fr</F><F
+   vals="g2|s120|n1031|r-">F</F><F vals="g1|s120|n1031|r-"
+   >chte der gerechtigkeit vnd wiedergeburt, welche dem glauben folgen m</F><F vals="g2|s120|n1031|r-">F</F><F
+   vals="g1|s120|n1031|r-">ssen vnd one welche, als</F><Z>N1|I5|Z1\<F vals=">+">5</F></Z><F vals="g1|s120|n1031|r-"
+   > ein guter baum one gute fr</F><F vals="g2|s120|n1031|r-">F</F><F vals="g1|s120|n1031|r-"
+   >chte, die so warhafftig gerecht vnd newe geboren nicht sein k</F><F vals="g2|s120|n1031|r-">=</F><F
+   vals="g1|s120|n1031|r-">nnen noch sollen.</F><P vals="SB100.0|AB" /></tei:ab>
+            <tei:ab><F vals="g1|s120|n1031|r-">
+Denn darumb werden wir new geboren, das wir ein newe Creaturen werden, geschaffen inn Christo Jhesu zu guten wercken, zu welchen vns Gott zuuor bereitet hat, das wir darinnen wandeln sollen Ephe.2.</F></tei:ab></Text>
+         </x:expect>
+      </x:scenario>
+   </x:scenario>
+</x:description>

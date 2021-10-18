@@ -50,7 +50,7 @@
           <xsl:if test="string-length($rendition) gt 0">
             <xsl:attribute name="rendition" select="'#' || $rendition" />
           </xsl:if>
-          <xsl:apply-templates />
+          <xsl:apply-templates select="node()" />
         </hi>
       </xsl:when>
       <xsl:otherwise>
@@ -58,6 +58,18 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+   
+   <xsl:template match="*:F/text()">
+      <!-- there should now only be text in here -->
+      <xsl:choose>
+         <xsl:when test="not(parent::*/preceding-sibling::node()) and matches(., '^\s')">
+            <xsl:value-of select="replace(., '^\s+', '')"/>
+         </xsl:when>
+         <xsl:otherwise>
+            <xsl:sequence select="." />
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
   
   <!-- O = outer margin (I = inner margin) ? -->
   <xsl:template match="*:O">

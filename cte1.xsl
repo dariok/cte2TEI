@@ -3,29 +3,20 @@
   exclude-result-prefixes="#all"
   version="3.0">
   
-  <xsl:output omit-xml-declaration="1" /> 
+  <xsl:output omit-xml-declaration="1" />
   
   <xsl:template match="*:end" />
   
   <xsl:template match="*:Text">
     <Text xmlns="">
-      <xsl:for-each-group select="node()" group-ending-with="*:end">
-        <xsl:text>
-    </xsl:text>
+      <xsl:for-each-group select="node()" group-ending-with="*:P">
+         <xsl:text>
+            </xsl:text>
         <ab xmlns="http://www.tei-c.org/ns/1.0">
           <xsl:apply-templates select="current-group()" />
         </ab>
       </xsl:for-each-group>
     </Text>
-  </xsl:template>
-  
-  <xsl:template match="*:F[*:P]">
-    <!-- P is always before \n; as \n is turned into *:end, there is a max of one P in F -->
-    <F xmlns="">
-      <xsl:sequence select="@*" />
-      <xsl:sequence select="node()[not(self::*:P)]" />
-    </F>
-    <xsl:apply-templates select="node()[self::*:P]" />
   </xsl:template>
   
   <xsl:template match="*:HeaderFooter">

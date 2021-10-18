@@ -61,15 +61,24 @@
     </Apparatus1>
   </xsl:template>
   
-  <xsl:template match="*:F[*:end]">
-    <xsl:for-each-group select="node()" group-ending-with="*:end">
-      <F>
-        <xsl:apply-templates select="parent::*/@*" />
-        <xsl:apply-templates select="current-group()[not(self::*:end)]" />
-      </F>
-      <xsl:sequence select="current-group()[self::*:end]" />
-    </xsl:for-each-group>
-  </xsl:template>
+   <xsl:template match="*:F[*:P]">
+      <xsl:for-each-group select="node()" group-ending-with="*:P">
+         <F>
+            <xsl:apply-templates select="parent::*/@*" />
+            <xsl:apply-templates select="current-group()[not(self::*:P)]" />
+         </F>
+         <xsl:sequence select="current-group()[self::*:P]" />
+      </xsl:for-each-group>
+   </xsl:template>
+   
+   <xsl:template match="*:Text//*:end">
+      <xsl:choose>
+         <xsl:when test="preceding-sibling::*[1][self::*:P]" />
+         <xsl:otherwise>
+            <lb xmlns="http://www.tei-c.org/ns/1.0" />
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
   
   <xsl:template match="@vals">
     <xsl:choose>

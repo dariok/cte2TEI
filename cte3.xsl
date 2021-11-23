@@ -34,6 +34,13 @@
       </body>
     </text>
   </xsl:template>
+   
+  <xsl:template match="*:C">
+    <hi>
+      <xsl:apply-templates select="@vals" />
+      <xsl:apply-templates />
+    </hi>
+  </xsl:template>
   
   <xsl:template match="*:F">
     <xsl:variable name="rendition">

@@ -39,6 +39,10 @@
       </xsl:copy>
     </xsl:if>
   </xsl:template>
+   
+   <xsl:template match="*:C/@vals">
+      <xsl:attribute name="vals" select=". || '|AC'" />
+   </xsl:template>
   
   <xsl:template match="@* | node()">
     <xsl:copy>

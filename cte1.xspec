@@ -67,4 +67,19 @@ Denn darumb werden wir new geboren, das wir ein newe Creaturen werden, geschaffe
          </x:expect>
       </x:scenario>
    </x:scenario>
+   
+   <x:scenario label="T2: centre">
+      <x:scenario label="T2.1">
+         <x:context>
+            <Text>
+               <F vals="s120"><C vals="">Nr. 9</C></F><P vals="P1"/>
+            </Text>
+         </x:context>
+         <x:expect label="." xml:space="preserve"
+            ><Text>
+            <ab xmlns="http://www.tei-c.org/ns/1.0"
+                  ><F xmlns="" vals="s120"><C vals="|AC">Nr. 9</C></F><P vals="P1" xmlns="" /></ab
+               ></Text></x:expect>
+      </x:scenario>
+   </x:scenario>
 </x:description>

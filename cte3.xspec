@@ -83,4 +83,16 @@ opera sunt necessaria ad salutem, </hi><hi style="font-size: 10pt; n2057; font-s
             <ab><hi style="font-family: ; font-size: 12pt; n1031; r-;">Denn darumb werden wir new geboren, das wir ein newe Creaturen werden, geschaffen inn Christo Jhesu zu guten wercken, zu welchen vns Gott zuuor bereitet hat, das wir darinnen wandeln sollen Ephe.2.</hi></ab></body></text></x:expect>
       </x:scenario>
    </x:scenario>
+   
+   <x:scenario label="T2: centre">
+      <x:scenario label="T2.1">
+         <x:context href="cte1.xspec" select="//x:scenario[@label eq 'T2.1']/x:expect/*:Text" />
+         <x:expect label="." xml:space="preserve"
+            ><text xmlns="http://www.tei-c.org/ns/1.0"
+               ><body>
+            <ab><hi style="font-size: 12pt;"><hi style="text-align: center;">Nr. 9</hi></hi
+                     ><P xmlns="" style=";" /></ab
+                  ></body></text></x:expect>
+      </x:scenario>
+   </x:scenario>
 </x:description>

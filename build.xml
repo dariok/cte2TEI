@@ -29,6 +29,7 @@
     <replaceregexp file="${cte0}" match="\^\-" replace="" flags="g" />
     <replaceregexp file="${cte0}" match="\^\+" replace="&#x00AD;" flags="g" />
     <replaceregexp file="${cte0}" match="\^\." replace=" " flags="g" />
+    <replaceregexp file="${cte0}" match="\^\_" replace="&#x00A0;" flags="g" />
     
     <!--  Clean up prologue -->
     <replaceregexp file="${cte0}" match="\\TemplateSpacing" replace="${line.separator}\\\\TemplateSpacing" flags="g" />

@@ -89,8 +89,8 @@
     <ptr>
       <xsl:sequence select="@*" />
       <xsl:if test="not(@corresp)">
-        <xsl:variable name="subtype" select="@subtype" />
-        <xsl:attribute name="position" select="count(preceding::tei:ptr[@subtype = $subtype and not(@corresp)]) + 1" />
+        <xsl:variable name="type" select="@type" />
+        <xsl:attribute name="position" select="count(preceding::tei:ptr[@type = $type and not(@corresp)]) + 1" />
       </xsl:if>
     </ptr>
   </xsl:template>

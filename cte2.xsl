@@ -31,8 +31,17 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:variable name="values" select="tokenize(substring-before(text(), '\'), '\|')" />
+     <xsl:variable name="type">
+        <xsl:choose>
+           <xsl:when test="$values[1] = 'A1'">App1</xsl:when>
+           <xsl:when test="$values[1] = 'N1'">Note1</xsl:when>
+           <xsl:otherwise>
+              <xsl:value-of select="$values[1]" />
+           </xsl:otherwise>
+        </xsl:choose>
+     </xsl:variable>
     
-    <ptr type="note" subtype="{$subtype}" n="{$n}">
+    <ptr type="{$type}" subtype="{$subtype}" n="{$n}">
       <xsl:choose>
         <xsl:when test="$values = 'R' and $values[starts-with(., 'D')]">
           <xsl:attribute name="corresp" select="$values[starts-with(., 'D')]" />

@@ -40,6 +40,8 @@
     <replaceregexp file="${cte0}" match="\\FontUser(\d+):([^,]+),(\d+)=(.+)"
       replace="&lt;fdef lfd=&quot;FontUser\1&quot; name=&quot;\2&quot; n=&quot;\3&quot; def=&quot;\4&quot; />" flags="g" />
     <replaceregexp file="${cte0}" match="name=&quot;\s+" replace="name=&quot;" flags="g" />
+    <replaceregexp file="${cte0}" match="SecondaryDocs=([^\\&lt;]+)"
+      replace="&lt;SecondaryDocs name=&quot;\1&quot;/>" flags="g" />
     
     <!-- newline serves as delimiter between blocks -->
     <replaceregexp file="${cte0}" match="${line.separator}" replace="&lt;end/&gt;${line.separator}" flags="g" />
@@ -71,7 +73,9 @@
     <tempfile property="cte4" suffix="-4.xml" destdir="temp"/>
     <tempfile property="cte5" suffix="-5.xml" destdir="temp"/>
     
-    <xslt in="${cte0}" style="cte0.xsl" out="${cte1}" />
+    <xslt in="${cte0}" style="cte0.xsl" out="${cte1}">
+       <param name="origFile" expression="${cte}"/>
+    </xslt>
     <xslt in="${cte1}" style="cte1.xsl" out="${cte2}" />
     <xslt in="${cte2}" style="cte2.xsl" out="${cte3}" />
     <xslt in="${cte3}" style="cte3.xsl" out="${cte4}" />

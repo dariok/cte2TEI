@@ -3,10 +3,23 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   exclude-result-prefixes="#all"
   version="3.0">
-  
-  <xsl:output omit-xml-declaration="1" />
-  
-  <xsl:import href="https://raw.githubusercontent.com/dariok/w2tei/master/string-pack.xsl"/>
+   
+   <xsl:param name="origFile" />
+   
+   <xsl:import href="https://raw.githubusercontent.com/dariok/w2tei/master/string-pack.xsl"/>
+   
+   <xsl:variable name="name" select="//*:SecondaryDocs/@name"/>
+   
+   <xsl:output omit-xml-declaration="1" />
+   
+   <xsl:template match="/">
+      <xsl:if test="exists(//*:SecondaryDocs)">
+         <xsl:processing-instruction name="cte-secondaryFile">
+            <xsl:value-of select="//*:SecondaryDocs/@name"/>
+         </xsl:processing-instruction>
+      </xsl:if>
+      <xsl:apply-templates />
+   </xsl:template>
   
   <xsl:template match="*:Format">
     <xsl:text>
@@ -69,6 +82,14 @@
          </F>
          <xsl:sequence select="current-group()[self::*:P]" />
       </xsl:for-each-group>
+   </xsl:template>
+   
+   <xsl:template match="*:Qs">
+      <xsl:variable name="lfd">
+         <xsl:number level="any" />
+      </xsl:variable>
+      <cell n="{$lfd}"  xmlns="http://www.tei-c.org/ns/1.0" />
+      <xsl:sequence select="." />
    </xsl:template>
    
    <xsl:template match="*:Text//*:end">

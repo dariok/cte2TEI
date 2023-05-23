@@ -4,9 +4,9 @@
   exclude-result-prefixes="#all"
   version="3.0">
    
-   <xsl:param name="origFile" />
-   
    <xsl:import href="https://raw.githubusercontent.com/dariok/w2tei/master/string-pack.xsl"/>
+   
+   <xsl:param name="origFile" />
    
    <xsl:variable name="name" select="//*:SecondaryDocs/@name"/>
    
@@ -15,7 +15,7 @@
    <xsl:template match="/">
       <xsl:if test="exists(//*:SecondaryDocs)">
          <xsl:processing-instruction name="cte-secondaryFile">
-            <xsl:value-of select="//*:SecondaryDocs/@name"/>
+            <xsl:value-of select="//*:SecondaryDocs/@name => replace('\^s', ' ')"/>
          </xsl:processing-instruction>
       </xsl:if>
       <xsl:apply-templates />
@@ -54,9 +54,11 @@
       <xsl:for-each-group select="node()" group-starting-with="*:W">
         <xsl:text>
     </xsl:text>
-        <Note1>
-          <xsl:apply-templates select="current-group()" />
-        </Note1>
+        <xsl:if test="current-group() => string-join() => normalize-space()">
+          <Note1>
+            <xsl:apply-templates select="current-group()" />
+          </Note1>
+        </xsl:if>
       </xsl:for-each-group>
     </Notes1>
   </xsl:template>
@@ -80,7 +82,7 @@
             <xsl:apply-templates select="parent::*/@*" />
             <xsl:apply-templates select="current-group()[not(self::*:P)]" />
          </F>
-         <xsl:sequence select="current-group()[self::*:P]" />
+         <xsl:apply-templates select="current-group()[self::*:P]" />
       </xsl:for-each-group>
    </xsl:template>
    
@@ -103,9 +105,12 @@
   
   <xsl:template match="@vals">
     <xsl:choose>
-      <xsl:when test="starts-with(., 'P')">
+      <xsl:when test="starts-with(., 'P') and contains(., '|')">
         <xsl:attribute name="type" select="xstring:substring-before(., '|')" />
         <xsl:attribute name="vals" select="xstring:substring-after(., '|')" />
+      </xsl:when>
+      <xsl:when test="starts-with(., 'P')">
+        <xsl:attribute name="type" select="." />
       </xsl:when>
       <xsl:otherwise>
         <xsl:sequence select="." />
